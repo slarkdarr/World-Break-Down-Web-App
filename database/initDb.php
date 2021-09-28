@@ -39,6 +39,15 @@ try {
     $db = new PDO('sqlite:' . DATABASE_NAME.  '.sqlite');
     initDatabase($db, $tables);
     echo 'database initialized';
+
+    $query = 'INSERT INTO users (email, username, password, role) VALUES (:email, :username, :password, :role);';
+    $stmt = $db->prepare($query);
+    $stmt->execute([
+        ':email' => 'admin@admin.com',
+        ':username' => 'admin',
+        ':password' => password_hash('admin123', PASSWORD_DEFAULT),
+        'role'  => 'admin'
+    ]);
     // $db->exec('INSERT INTO users (email, username, password, role) VALUES ("jafar@jafar.com", "halogais", "123456", "admin");');
     // $db->exec('INSERT INTO products (name, description, price, stock, image)  VALUES ("dorayaki", "dorayaki sedap", 30000, 100, "image");');
     // $datetime = $timestamp = date('Y-m-d H:i:s');
