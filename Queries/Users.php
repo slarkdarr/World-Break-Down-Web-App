@@ -24,28 +24,57 @@ class Users
     /**
      * Insert a new user into the users table
      * @param array $user consist of (email, username, password, role)
-     * @return the id of the new user
+     * @return boolean success
      */
-    public function insertUser($user)
+    public function insert($user)
     {
-        $query = 'INSERT INTO users (email, username, password, role) VALUES (:email, :username, :password, :role);';
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([
-            ':email' => $user['email'],
-            ':username' => $user['username'],
-            ':password' => password_hash($user['password'], PASSWORD_DEFAULT),
-            'role'  => $user['role']
-        ]);
+        try {
+            $query = 'INSERT INTO users (email, username, password, role) VALUES (:email, :username, :password, :role);';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                ':email' => $user['email'],
+                ':username' => $user['username'],
+                ':password' => password_hash($user['password'], PASSWORD_DEFAULT),
+                ':role'  => $user['role']
+            ]);
 
-        return $this->pdo->lastInsertId();
+            return true;
+        } catch (\PDOException $Exception) {
+            return false;
+        }
     }
 
     /**
-     * @return all user in users table
+     * @return associativeArray users
      */
-    public function getAllUsers()
+    public function get()
     {
         $stmt = $this->pdo->query('SELECT * FROM users');
+        $users = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $users[] = [
+                'id' => $row['id'],
+                'email' => $row['email'],
+                'username' => $row['username'],
+                'password' => $row['password'],
+                'role' => $row['role']
+            ];
+        }
+        return $users;
+    }
+
+    /**
+     * @param string|integer $id
+     * @return associative array based on condition
+     */
+    public function whereId($id)
+    {
+        $query = 'SELECT * FROM users WHERE id = :id ;';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':id' => $id
+        ]);
+
         $users = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $users[] = [
