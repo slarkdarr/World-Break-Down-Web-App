@@ -1,14 +1,15 @@
 <?php
 include_once('config.php');
 include_once('database/SQLiteConnection.php');
-include_once('Queries/Users.php');
-include_once('Queries/Products.php');
+include_once('Model/User.php');
+include_once('Model/Product.php');
+include_once('Model/History.php');
 
 
 $pdo = (new SQLiteConnection())->connect();
 
 if ($pdo != null) {
-    $User = new Users($pdo);
+    $User = new User($pdo);
     // $newUser = [
     //     'email' => 'example@example.co.id',
     //     'username' => 'asedese',
@@ -17,36 +18,55 @@ if ($pdo != null) {
     // ];
 
     $userData = $User->get();
-    $userData = $User->whereId(2);
-
-    $Product = new Products($pdo);
-    $newProduct = [
-        'name' => 'dorayaki coklat',
-        'description' => 'dorayaki kesukaan doraemon',
-        'price' => 35000,
-        'stock' => 100,
-        'image' => 'Uploads/dorayaki.jpg'
-    ];
-    $Product->insert($newProduct);
-    // $Product->deleteById(10);
-    $productData = $Product->get();
-    var_dump($productData[0]); 
-
+    $userData = $User->whereId(1);
 
     // if (password_verify('admin123', $userData[0]['password'])){
     //     echo 'equal';
     // }
+
+    $Product = new Product($pdo);
+    // $newProduct = [
+    //     'name' => 'dorayaki coklat',
+    //     'description' => 'dorayaki kesukaan doraemon',
+    //     'price' => 35000,
+    //     'stock' => 100,
+    //     'image' => 'Uploads/dorayaki.jpg'
+    // ];
+    // $Product->insert($newProduct);
+    // $Product->deleteById(4);
+    $productData = $Product->get();
+
+    $history = new History($pdo);
+
+    // $history->insert([
+    //     'user_id' => 1,
+    //     'product_id' => 1,
+    //     'quantity' => 3,
+    //     'total_price' => 30000
+    // ]);
+    $historyData = $history->whereProductId(1);
 } else
     echo 'Whoops, could not connect to the SQLite database!';
 ?>
 
 <body>
-    <?php foreach ($userData as $item) {
-        foreach ($item as $val) { ?>
-            <p><?= $val ?></p>
+    <?php if (sizeof($userData) > 0) { ?>
+        <?php foreach ($userData as $val) { ?>
+            <?php foreach ($val as $key => $value) { ?>
+                <p><?= $key . '=>' . $value ?></p>
     <?php }
+        }
     } ?>
 
-    <img src="<?php echo $productData[0]['image']?>" alt="">
+
+    <?php if (sizeof($historyData) > 0) { ?>
+        <?php foreach ($historyData as $val) { ?>
+            <?php foreach ($val as  $key => $value) { ?>
+                <p><?= $key . '=>' . $value  ?></p>
+    <?php }
+        }
+    } ?>
+
+    <img src="<?php echo $productData[0]['image'] ?>" alt="">
 
 </body>
