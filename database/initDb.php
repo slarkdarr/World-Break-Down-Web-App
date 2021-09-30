@@ -46,7 +46,7 @@ try {
         ':email' => 'admin@admin.com',
         ':username' => 'admin',
         ':password' => password_hash('admin123', PASSWORD_DEFAULT),
-        'role'  => 'admin'
+        ':role'  => 'admin'
     ]);
     // $db->exec('INSERT INTO users (email, username, password, role) VALUES ("jafar@jafar.com", "halogais", "123456", "admin");');
     // $db->exec('INSERT INTO products (name, description, price, stock, image)  VALUES ("dorayaki", "dorayaki sedap", 30000, 100, "image");');
