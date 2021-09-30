@@ -111,7 +111,7 @@ class History
      */
     public function whereUserId($userId)
     {
-        $query = 'SELECT * FROM histories WHERE user_id = :user_id ;';
+        $query = 'SELECT *, u.id as uid FROM histories INNER JOIN users u ON u.id = histories.user_id WHERE user_id = :user_id ;';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':user_id' => $userId
@@ -122,6 +122,7 @@ class History
             $histories[] = [
                 'id' => $row['id'],
                 'user_id' => $row['user_id'],
+                'username' => $row['username'],
                 'product_id' => $row['product_id'],
                 'quantity'  => $row['quantity'],
                 'total_price' => $row['total_price'],
@@ -139,7 +140,7 @@ class History
      */
     public function whereProductId($productId)
     {
-        $query = 'SELECT * FROM histories WHERE product_id = :product_id ;';
+        $query = 'SELECT *, p.id as pid, p.name as product_name FROM histories INNER JOIN products p ON p.id = histories.product_id WHERE product_id = :product_id ;';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':product_id' => $productId
@@ -149,8 +150,9 @@ class History
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $histories[] = [
                 'id' => $row['id'],
+                'product_id' => $row['pid'],
+                'product_name' => $row['product_name'],
                 'user_id' => $row['user_id'],
-                'product_id' => $row['product_id'],
                 'quantity'  => $row['quantity'],
                 'total_price' => $row['total_price'],
                 'date'  => $row['date'],
