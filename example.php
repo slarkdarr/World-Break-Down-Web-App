@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
-include_once('database/SQLiteConnection.php');
+include_once('Database/SQLiteConnection.php');
 include_once('Model/User.php');
 include_once('Model/Product.php');
 include_once('Model/History.php');
