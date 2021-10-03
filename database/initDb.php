@@ -48,6 +48,12 @@ try {
         ':password' => password_hash('admin123', PASSWORD_DEFAULT),
         ':role'  => 'admin'
     ]);
+    $stmt->execute([
+        ':email' => 'user@user.com',
+        ':username' => 'user',
+        ':password' => password_hash('user123', PASSWORD_DEFAULT),
+        ':role'  => 'user'
+    ]);
     // $db->exec('INSERT INTO users (email, username, password, role) VALUES ("jafar@jafar.com", "halogais", "123456", "admin");');
     // $db->exec('INSERT INTO products (name, description, price, stock, image)  VALUES ("dorayaki", "dorayaki sedap", 30000, 100, "image");');
     // $datetime = $timestamp = date('Y-m-d H:i:s');

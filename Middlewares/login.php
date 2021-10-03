@@ -1,18 +1,16 @@
 <?php
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/User.php');
+include_once('../config.php');
 
 function validateUser($username, $data)
 {
     foreach ($data as $key => $val) {
-        if (array_key_exists($username, $val)) {
-            return $key;
-        }
+        if ($val['username'] === $username || $val['email'] === $username) return $key;
     }
     return -1;
 }
 
-session_start();
 if (isset($_POST['login'])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -22,25 +20,23 @@ if (isset($_POST['login'])) {
     if ($pdo != null) {
         $User = new User($pdo);
         $userData = $User->get();
-        var_dump($userData);
-        // $index = validateUser($username, $userData);
-    } else{
+        $index = validateUser($username, $userData);
+
+        if ($index == -1) {
+            setcookie('message', 'username invalid', time() + 3600 * 24, '/');
+            echo $_COOKIE['message'];
+            header("location:" . URL . "Views/Login.php");
+        } else {
+            if (password_verify($password, $userData[$index]['password'])) {
+                setcookie('message', "login success, welcome $username", time() + 3600 * 24, '/');
+                setcookie('username', $username, time() + 3600 * 24, '/');
+                header("location:" . URL . "index.php");
+            } else {
+                setcookie('message',  "password invalid", time() + 3600 * 24, '/');
+                header("location:" . URL . "Views/login.php");
+            }
+        }
+    } else {
         echo 'Whoops, could not connect to the SQLite database!';
     }
-
-
-    // if ($index == -1) {
-    //     $_SESSION['message'] = "username invalid";
-    //     header("location:" . URL . "Views/login.php");
-    // } else {
-    //     $pw = $userData[$index][$username];
-    //     if ($pw == $password) {
-    //         $_SESSION['message'] = "login success, welcome $username";
-    //         $_SESSION['username'] = $username;
-    //         header("location:" . URL . "index.php");
-    //     } else {
-    //         $_SESSION['message'] = "password invalid";
-    //         header("location:" . URL . "Views/login.php");
-    //     }
-    // }
 }

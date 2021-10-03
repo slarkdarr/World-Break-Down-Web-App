@@ -1,19 +1,17 @@
 <?php
 include_once('../config.php');
-session_start();
-
-if (isset($_SESSION['message'])) {
-    alert($_SESSION['message']);
+if (isset($_COOKIE['message'])) {
+    alert($_COOKIE['message']);
 }
 
-if (isset($_SESSION['username'])) {
+if (isset($_COOKIE['username'])) {
     header("location:" . URL . "index.php");
 }
 
 function alert($msg)
 {
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    unset($_SESSION['message']);
+    setcookie('message', '', time() - 3600, '/');
 }
 ?>
 

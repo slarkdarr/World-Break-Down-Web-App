@@ -1,20 +1,19 @@
 <?php
 include_once('config.php');
 
-session_start();
-
 function alert($msg)
 {
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    unset($_SESSION['message']);
+    setcookie('message', '', time() - 3600, '/');
 }
 // Validate logged in
-if (isset($_SESSION['username'])) {
-    if (isset($_SESSION['message'])) {
-        alert($_SESSION['message']);
+
+if (isset($_COOKIE['username'])) {
+    if (isset($_COOKIE['message'])) {
+        alert($_COOKIE['message']);
     }
 } else {
-    $_SESSION['message'] = "Login to view Doraemon Ecommerce";
+    setcookie('message', 'Login to view Doraemon Ecommerce', time()+3600*24, '/');
     header("location:" . URL . 'Views/Login.php');
 }
 
@@ -24,7 +23,8 @@ if (isset($_SESSION['username'])) {
     <!-- Navbar -->
     <p>Halo</p>
     <!-- Content -->
-
+    <p><?php echo $_COOKIE['username'] ?></p>
+    <p><?php echo $_COOKIE['message'] ?></p>
     <!-- Footer -->
 
 </body>
