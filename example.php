@@ -5,8 +5,8 @@ include_once('Model/User.php');
 include_once('Model/Product.php');
 include_once('Model/History.php');
 
-
-$pdo = (new SQLiteConnection())->connect();
+$databasePath = 'database/doraemon.sqlite';
+$pdo = (new SQLiteConnection())->connect($databasePath);
 
 if ($pdo != null) {
     $User = new User($pdo);

@@ -1,5 +1,4 @@
 <?php
-include_once('../config.php');
 
 /**
  * SQLite connnection
@@ -14,13 +13,14 @@ class SQLiteConnection
 
     /**
      * return in instance of the PDO object that connects to the SQLite database
+     * @param string $databasePath path relative to database
      * @return \PDO
      */
-    public function connect()
+    public function connect($databasePath)
     {
         if ($this->pdo == null) {
             try {
-                $this->pdo = new \PDO("sqlite:" . DATABASE_PATH);
+                $this->pdo = new \PDO("sqlite:" . $databasePath);
             } catch (\PDOException $e) {
                 echo $e->getMessage();
             }
