@@ -11,29 +11,31 @@ $pdo = (new SQLiteConnection())->connect($databasePath);
 if ($pdo != null) {
     $User = new User($pdo);
     // $newUser = [
-    //     'email' => 'example@example.co.id',
-    //     'username' => 'asedese',
-    //     'password' => 'admin123',
+    //     'email' => 'user@user.co.id',
+    //     'username' => 'user',
+    //     'password' => 'user123',
     //     'role' => 'user'
     // ];
+    // $User->insert($newUser);
 
     $userData = $User->get();
     $userData = $User->whereId(1);
 
-    // if (password_verify('admin123', $userData[0]['password'])){
-    //     echo 'equal';
-    // }
-
+    // Product seeder
     $Product = new Product($pdo);
-    // $newProduct = [
-    //     'name' => 'dorayaki coklat',
-    //     'description' => 'dorayaki kesukaan doraemon',
-    //     'price' => 35000,
-    //     'stock' => 100,
-    //     'image' => 'Uploads/dorayaki.jpg'
-    // ];
-    // $Product->insert($newProduct);
-    // $Product->deleteById(4);
+    for ($i = 0; $i < 25; $i++){
+        $newProduct = [
+            'name' => 'dorayaki ' . $i,
+            'description' => 'dorayaki kesukaan doraemon',
+            'price' => 35000,
+            'stock' => 100,
+            'image' => 'Assets/uploads/dorayaki.jpg'
+        ];
+        $Product->insert($newProduct);
+    }
+
+
+
     $productData = $Product->get();
 
     $history = new History($pdo);

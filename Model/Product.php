@@ -66,6 +66,28 @@ class Product
     }
 
     /**
+     * @param integer|string $pageFirstResult
+     * @param integer|string $resultPerPage
+     * @return associativeArray Products with paginated
+     */
+    public function getPaginated($pageFirstResult, $resultPerPage)
+    {
+        $stmt = $this->pdo->query('SELECT * FROM products LIMIT ' . $pageFirstResult . ',' . $resultPerPage . ';');
+        $products = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $products[] = [
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'description' => $row['description'],
+                'price' => $row['price'],
+                'stock'  => $row['stock'],
+                'image'  => $row['image'],
+            ];
+        }
+        return $products;
+    }
+
+    /**
      * @param string|integer $id
      * @return associative array based on condition
      */
@@ -101,5 +123,15 @@ class Product
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         return $stmt->rowCount();
+    }
+
+    /**
+     * @return integer $numberOfRow
+     */
+    public function count(){
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) as count FROM products');
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['count'];
     }
 }
