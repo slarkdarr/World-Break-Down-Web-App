@@ -22,7 +22,7 @@ function alert($msg)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register</title>
-        <link rel="stylesheet" href="../Assets/css/login.css">
+        <link rel="stylesheet" href="../Assets/css/register.css">
         <link rel="stylesheet" href="../Assets/css/style.css">
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
