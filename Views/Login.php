@@ -5,7 +5,7 @@ if (isset($_COOKIE['message'])) {
 }
 
 if (isset($_COOKIE['username'])) {
-    header("location:" . URL . "index.php");
+    header("location: /index.php");
 }
 
 function alert($msg)
