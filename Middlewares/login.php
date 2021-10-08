@@ -12,9 +12,9 @@ function validateUser($username, $data)
 }
 
 if (isset($_POST['login'])) {
-    $username = $_POST["username"];
+    $username = $_POST["username"]; // can be email too
     $password = $_POST["password"];
-    $databasePath = '../database/doraemon.sqlite';
+    $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
 
     if ($pdo != null) {
@@ -25,15 +25,15 @@ if (isset($_POST['login'])) {
         if ($index == -1) {
             setcookie('message', 'username invalid', time() + 3600 * 24, '/');
             echo $_COOKIE['message'];
-            header("location:" . URL . "Views/Login.php");
+            header("location: /Views/Login.php");
         } else {
             if (password_verify($password, $userData[$index]['password'])) {
                 setcookie('message', "login success, welcome $username", time() + 3600 * 24, '/');
                 setcookie('username', $username, time() + 3600 * 24, '/');
-                header("location:" . URL . "index.php");
+                header("location: /index.php");
             } else {
                 setcookie('message',  "password invalid", time() + 3600 * 24, '/');
-                header("location:" . URL . "Views/login.php");
+                header("location: /Views/login.php");
             }
         }
     } else {

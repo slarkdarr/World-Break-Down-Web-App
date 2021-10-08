@@ -5,7 +5,7 @@ include_once('Model/User.php');
 include_once('Model/Product.php');
 include_once('Model/History.php');
 
-$databasePath = 'database/doraemon.sqlite';
+$databasePath = 'database/' . DATABASE_NAME . '.sqlite';
 $pdo = (new SQLiteConnection())->connect($databasePath);
 
 if ($pdo != null) {

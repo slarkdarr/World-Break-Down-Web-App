@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
-include_once('Database/SQLiteConnection.php');
+include_once('database/SQLiteConnection.php');
 include_once('Model/Product.php');
 
 function alert($msg)
@@ -9,14 +9,13 @@ function alert($msg)
     setcookie('message', '', time() - 3600, '/');
 }
 // Validate logged in
-
 if (isset($_COOKIE['username'])) {
     if (isset($_COOKIE['message'])) {
         alert($_COOKIE['message']);
     }
 } else {
     setcookie('message', 'Login to view Doraemon Ecommerce', time()+3600*24, '/');
-    header("location:" . URL . 'Views/Login.php');
+    header("location: /Views/Login.php");
 }
 
 // Check page for pagination ?page=
