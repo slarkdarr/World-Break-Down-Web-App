@@ -15,7 +15,8 @@ $tables = [
         description TEXT,
         price INTEGER NOT NULL,
         stock INTEGER NOT NULL,
-        image TEXT
+        image TEXT,
+        sold INTEGER
     );',
     'histories' => 'DROP TABLE IF EXISTS histories; CREATE TABLE IF NOT EXISTS histories (
         id INTEGER PRIMARY KEY NOT NULL,

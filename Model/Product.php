@@ -29,7 +29,7 @@ class Product
     public function insert($product)
     {
         try {
-            $query = 'INSERT INTO products (name, description, price, stock, image) VALUES (:name, :description, :price, :stock, :image);';
+            $query = 'INSERT INTO products (name, description, price, stock, image, sold) VALUES (:name, :description, :price, :stock, :image, 0);';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([
                 ':name' => $product['name'],
@@ -50,7 +50,7 @@ class Product
      */
     public function get()
     {
-        $stmt = $this->pdo->query('SELECT * FROM products');
+        $stmt = $this->pdo->query('SELECT * FROM products ORDER BY sold DESC;');
         $products = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $products[] = [
@@ -60,6 +60,7 @@ class Product
                 'price' => $row['price'],
                 'stock'  => $row['stock'],
                 'image'  => $row['image'],
+                'sold'  => $row['sold'],
             ];
         }
         return $products;
@@ -72,7 +73,7 @@ class Product
      */
     public function getPaginated($pageFirstResult, $resultPerPage)
     {
-        $stmt = $this->pdo->query('SELECT * FROM products LIMIT ' . $pageFirstResult . ',' . $resultPerPage . ';');
+        $stmt = $this->pdo->query('SELECT * FROM products ORDER BY sold DESC LIMIT ' . $pageFirstResult . ',' . $resultPerPage . ';');
         $products = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $products[] = [
@@ -82,6 +83,7 @@ class Product
                 'price' => $row['price'],
                 'stock'  => $row['stock'],
                 'image'  => $row['image'],
+                'sold'  => $row['sold'],
             ];
         }
         return $products;
@@ -108,6 +110,7 @@ class Product
                 'price' => $row['price'],
                 'stock'  => $row['stock'],
                 'image'  => $row['image'],
+                'sold'  => $row['sold'],
             ];
         }
         return $products;
