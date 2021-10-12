@@ -55,7 +55,9 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
 ?>
 
 <body>
-    <!-- Navbar -->
+     <!-- Navbar -->
+    <?php include 'partials/navbar.php'; ?>
+    <!-- End navbar -->
 
     <!-- Content -->
     <div class="content">
@@ -100,6 +102,8 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
 
 
     <!-- Footer -->
+    <?php include 'partials/footer.php'; ?>
+    <!-- End Footer -->
 
 </body>
 
