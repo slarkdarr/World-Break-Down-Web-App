@@ -88,4 +88,29 @@ class User
 
         return $users;
     }
+
+    /**
+     * @param string $username
+     * @return associative array based on condition
+     */
+    public function whereUsername($username)
+    {
+        $query = 'SELECT * FROM users WHERE username = :username LIMIT 1;';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':username' => $username
+        ]);
+
+        $users = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $users[] = [
+                'id' => $row['id'],
+                'email' => $row['email'],
+                'username' => $row['username'],
+                'password' => $row['password'],
+                'role' => $row['role']
+            ];
+        }
+        return $users;
+    }
 }
