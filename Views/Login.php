@@ -33,31 +33,33 @@ function alert($msg)
         <div class="card grid-container">
             <div class="card-left grid-item">
                 <div class="logo">
-                    <img src="../Assets/images/burung.jpg" alt="" class="image">
+                    <img src="../Assets/images/dorayaki.png" alt="" class="image">
                 </div>
             </div>
             <div class="card-right grid-item">
-                <div class="head-form">
-                    <h1>Login</h1>
-                </div>
                 <div class="form">
-                    <form action="../Middlewares/login.php" method="POST">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <div class="form-input">
-                                <input type="text" name="username" placeholder="username / email" required>
+                    <div class="head-form">
+                        <h1>Login</h1>
+                    </div>
+                    <div class="form-input">
+                        <form action="../Middlewares/login.php" method="POST">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <div class="form-input">
+                                    <input type="text" name="username" placeholder="username / email" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="form-input">
-                                <input type="password" name="password" placeholder="password" required>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="form-input">
+                                    <input type="password" name="password" placeholder="password" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="button-submit">
-                            <button type="submit" name="login">Login</button>
-                        </div>
-                    </form>
+                            <div class="button-submit">
+                                <button type="submit" name="login">Login</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
