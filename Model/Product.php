@@ -38,7 +38,6 @@ class Product
                 ':stock'  => $product['stock'],
                 ':image'  => $product['image'],
             ]);
-
             return true;
         } catch (\PDOException $Exception) {
             return false;

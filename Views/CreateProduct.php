@@ -15,15 +15,12 @@
 </head>
 
 <?php 
+
 // Validate logged in
-if (isset($_COOKIE['username']) && isset($_COOKIE['role'])) {
-    
-} else {
+if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
     setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
     header("location: /Views/Login.php");
 }
-
-
 ?>
 
 <body>
@@ -35,7 +32,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['role'])) {
     <div class="content">
         <div class="wrapper">
             <h3 class="title">Create DORAYAKI</h3>
-            <form class="form" action="../Middlewares/create.php" method="POST">
+            <form class="form" action="../Middlewares/create.php" method="POST" enctype="multipart/form-data">
 
                 <div class="input-field">
                     <label for="name">DORAYAKI Variant</label>
@@ -59,7 +56,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['role'])) {
 
                 <div class="input-field">
                     <label for="image">Image</label>
-                    <input class="upload" type="file" id="image" name="image" accept=".png,.jpg,.jpeg" required>
+                    <input class="upload" type="file" id="image" name="file" accept=".png,.jpg,.jpeg" required>
                 </div>
 
                 <div class="input-field">

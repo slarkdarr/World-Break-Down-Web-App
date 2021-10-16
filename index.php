@@ -27,6 +27,7 @@ if (isset($_COOKIE['username'])) {
     if (isset($_COOKIE['message'])) {
         alert($_COOKIE['message']);
     }
+    $role = $_COOKIE['role'];
 } else {
     setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
     header("location: /Views/Login.php");
@@ -61,10 +62,11 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
 
     <!-- Content -->
     <div class="content">
-        <div class="add-product">
-            <a href="Views/CreateProduct.php" class="button"><i class="fas fa-plus"></i>Variant</a>
-        </div>
-
+        <?php if ($role === 'admin') { ?>
+            <div class="add-product">
+                <a href="Views/CreateProduct.php" class="button"><i class="fas fa-plus"></i>Variant</a>
+            </div>
+        <?php } ?>
         <section class="product-section">
             <div class="products" id="products">
                 <?php foreach ($products as $product) { ?>
