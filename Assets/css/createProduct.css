@@ -106,7 +106,7 @@
 }
 
 ::-webkit-file-upload-button:hover {
-    opacity: 0.8;
+  background-color: #4eb5f1;
 }
 
 @media (max-width: 420px) {

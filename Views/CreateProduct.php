@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +12,7 @@
     <title>Jajan.id</title>
 </head>
 
-<?php 
+<?php
 
 // Validate logged in
 if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
@@ -55,8 +53,8 @@ if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role']
                 </div>
 
                 <div class="input-field">
-                    <label for="image">Image</label>
-                    <input class="upload" type="file" id="image" name="file" accept=".png,.jpg,.jpeg" required>
+                    <label for="file">Image</label>
+                    <input class="upload" type="file" id="file" name="file" accept=".png,.jpg,.jpeg" required>
                 </div>
 
                 <div class="input-field">

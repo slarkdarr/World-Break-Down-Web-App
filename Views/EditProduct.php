@@ -12,6 +12,43 @@
     <title>Jajan.id</title>
 </head>
 
+<?php
+
+include_once('../config.php');
+include_once('../database/SQLiteConnection.php');
+include_once('../Model/Product.php');
+
+// Validate logged in
+if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
+    setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
+    header("location: /Views/Login.php");
+}
+
+// Validate logged in
+if (!isset($_GET['id'])) {
+    header("location: /Views/Login.php");
+} else {
+    // Sqlite conn
+    $databasePath = '../database/doraemon.sqlite';
+    $pdo = (new SQLiteConnection())->connect($databasePath);
+    if ($pdo !== null) {
+        $id = $_GET['id'];
+        $Product = new Product($pdo);
+        $item = $Product->whereId($id);
+        if (count($item) < 1) {
+            header("location: /index.php");
+        } else {
+            // get first item
+            $item = $item[0];
+        }
+    } else {
+        // Fail to connect
+        header("location: /index.php");
+    }
+}
+
+?>
+
 <body>
     <!-- Navbar -->
 
@@ -21,32 +58,35 @@
     <div class="content">
         <div class="wrapper">
             <h3 class="title">EDIT DORAYAKI</h3>
-            <form class="form" action="../Middlewares/create.php" method="POST">
+            <form class="form" action="../Middlewares/edit.php" method="POST" enctype="multipart/form-data">
 
                 <div class="input-field">
                     <label for="name">Product Variant</label>
-                    <input type="text" id="name" name="name" placeholder="Variant of product here .." required>
+                    <input type="text" id="name" name="name" placeholder="Variant of product here .." value="<?php echo $item['name'] ?>" required>
                 </div>
 
                 <div class="input-field">
                     <label for="description">Description</label>
-                    <textarea class="textarea" name="description" id="description" cols="30" rows="5" placeholder="Description goes here ..." required></textarea>
+                    <textarea class="textarea" name="description" id="description" cols="30" rows="5" placeholder="Description goes here ..." required><?php echo $item['description'] ?> </textarea>
                 </div>
 
                 <div class="input-field">
                     <label for="price">Price (Rupiah) </label>
-                    <input type="number" min='0' step="100" id="price" name="price" required>
+                    <input type="number" min='0' step="100" id="price" name="price" value="<?php echo $item['price'] ?>" required>
                 </div>
 
                 <div class="input-field">
                     <label for="price">Stock</label>
-                    <input type="number" min='0' id="stock" name="stock" required>
+                    <input type="number" min='0' id="stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
 
                 <div class="input-field">
-                    <label for="image">Image</label>
-                    <input class="upload" type="file" id="image" name="image" accept=".png,.jpg,.jpeg" required>
+                    <label for="file">Image</label>
+                    <input class="upload" type="file" id="file" name="file" accept=".png,.jpg,.jpeg">
+                    <label for="file">Leave blank if will not change</label>
                 </div>
+
+                <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
 
                 <div class="input-field">
                     <input class="button" type="submit" id="submit" name="edit" value="Update">

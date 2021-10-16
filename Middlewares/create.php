@@ -14,7 +14,7 @@ if (isset($_COOKIE['username']) && $_COOKIE['role'] === 'admin') {
     header("location: /Views/Login.php");
 }
 
-if (isset($_POST['create'])){
+if (isset($_POST['create'])) {
     $newProduct = [
         'name' => $_POST['name'],
         'description' => $_POST['description'],
@@ -29,30 +29,39 @@ if (isset($_POST['create'])){
     $targetDir = "../Storage/uploads/";
     $targetDirIndex = "Storage/uploads/";
     //the file being upload
-    $targetFile = $targetDir.basename($_FILES['file']['name']);
+    $targetFile = $targetDir . basename($_FILES['file']['name']);
     //select the file type - file extension
-    $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    //valid file extensions we will allow
+    $extensions_arr = array("jpg", "jpeg", "png");
+    //checking the extension of our uploaded file
 
-    // Add to array product
-    $newProduct['image'] = $targetDirIndex.$filename;
-    // Move file
-    move_uploaded_file($_FILES['file']['tmp_name'],$targetDir.$filename);
+    if (in_array($fileType, $extensions_arr)) {
+        // Add to array product
+        $newProduct['image'] = $targetDirIndex . $filename;
+        // Move file
+        move_uploaded_file($_FILES['file']['tmp_name'], $targetDir . $filename);
 
-    $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
-    $pdo = (new SQLiteConnection())->connect($databasePath);
-    if($pdo != null) {
-        $Product = new Product($pdo);
-        $bool = $Product->insert($newProduct);
-        if ($bool){
-            setcookie('message', 'New Variant ' . $newProduct['name'] . ' created successfully', time() + 3600 * 24, '/');
-            header("location: /index.php");
+        $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
+        $pdo = (new SQLiteConnection())->connect($databasePath);
+        if ($pdo != null) {
+            $Product = new Product($pdo);
+            $bool = $Product->insert($newProduct);
+            if ($bool) {
+                setcookie('message', 'New Variant ' . $newProduct['name'] . ' created successfully', time() + 3600 * 24, '/');
+                header("location: /index.php");
+            } else {
+                setcookie('message', 'New Variant ' . $newProduct['name'] . ' fail to create', time() + 3600 * 24, '/');
+                header("location: /index.php");
+            }
         } else {
-            setcookie('message', 'New Variant ' . $newProduct['name'] . ' fail to create', time() + 3600 * 24, '/');
-            header("location: /index.php");
+            // Fail to connect
+            header("location: /Views/CreateProduct.php");
         }
     } else {
-        // Fail to connect
+        // Fail extension type not found
         header("location: /Views/CreateProduct.php");
     }
-
+} else {
+    header("location: /Views/CreateProduct.php");
 }

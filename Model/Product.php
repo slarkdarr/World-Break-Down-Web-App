@@ -136,4 +136,26 @@ class Product
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['count'];
     }
+
+    /**
+     * @param associative $product associatve array new product data
+     * @return bool true if success, else false
+     */
+    public function update($product) {
+        try {
+            $query = 'UPDATE products SET name = :name, description = :description, price = :price, stock = :stock, image = :image WHERE id = :id';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                ':id'   => $product['id'],
+                ':name' => $product['name'],
+                ':description' => $product['description'],
+                ':price' => $product['price'],
+                ':stock'  => $product['stock'],
+                ':image'  => $product['image'],
+            ]);
+            return true;
+        } catch (\PDOException $Exception) {
+            return false;
+        }
+    }
 }
