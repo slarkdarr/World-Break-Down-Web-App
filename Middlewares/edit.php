@@ -4,11 +4,7 @@ include_once('../Model/Product.php');
 include_once('../config.php');
 
 // Validate logged in
-if (isset($_COOKIE['username']) && $_COOKIE['role'] === 'admin') {
-    if (isset($_COOKIE['message'])) {
-        alert($_COOKIE['message']);
-    }
-} else {
+if (!isset($_COOKIE['username']) && $_COOKIE['role'] !== 'admin') {
     setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
     header("location: /Views/Login.php");
 }
