@@ -55,12 +55,16 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
 ?>
 
 <body>
-     <!-- Navbar -->
+    <!-- Navbar -->
     <?php include 'partials/navbar.php'; ?>
     <!-- End navbar -->
 
     <!-- Content -->
     <div class="content">
+        <div class="add-product">
+            <a href="Views/CreateProduct.php" class="button"><i class="fas fa-plus"></i>Variant</a>
+        </div>
+
         <section class="product-section">
             <div class="products" id="products">
                 <?php foreach ($products as $product) { ?>
@@ -86,10 +90,10 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
 
         <?php if ($numberOfPage >= $page) { ?>
             <div class="pagination">
-                <?php for($i = 1; $i <= $numberOfPage; $i++) { ?>
-                <!-- <a href="#">&laquo;</a> -->
-                <a href="?page=<?php echo $i;?>" class=<?php echo ($page == $i) ? 'active'  : ''?>><?= $i ?></a>
-                <!-- <a class="active" href="#">2</a>
+                <?php for ($i = 1; $i <= $numberOfPage; $i++) { ?>
+                    <!-- <a href="#">&laquo;</a> -->
+                    <a href="?page=<?php echo $i; ?>" class=<?php echo ($page == $i) ? 'active'  : '' ?>><?= $i ?></a>
+                    <!-- <a class="active" href="#">2</a>
                 <!-- <a href="#">&raquo;</a> -->
                 <?php  } ?>
             </div>

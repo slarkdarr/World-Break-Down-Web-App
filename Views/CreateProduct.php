@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +13,18 @@
 
     <title>Jajan.id</title>
 </head>
+
+<?php 
+// Validate logged in
+if (isset($_COOKIE['username']) && isset($_COOKIE['role'])) {
+    
+} else {
+    setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
+    header("location: /Views/Login.php");
+}
+
+
+?>
 
 <body>
     <!-- Navbar -->
@@ -49,7 +63,7 @@
                 </div>
 
                 <div class="input-field">
-                    <input class="button" type="submit" id="submit" name="submit" value="Submit">
+                    <input class="button" type="submit" id="submit" name="create" value="Create">
                 </div>
 
             </form>
