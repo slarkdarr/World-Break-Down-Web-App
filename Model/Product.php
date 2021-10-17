@@ -89,6 +89,53 @@ class Product
     }
 
     /**
+     * @param integer|string $pageFirstResult
+     * @param integer|string $resultPerPage
+     * @param string $search
+     * @return associativeArray Products with paginated
+     */
+    public function getPaginatedSearch($pageFirstResult, $resultPerPage, $search)
+    {
+        $search = "%" . $search . '%';
+        $query = "SELECT * FROM products WHERE name LIKE :search LIMIT :pageFirstResult , :resultPerPage ;";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'pageFirstResult' => $pageFirstResult,
+            'resultPerPage' => $resultPerPage,
+            'search'    => $search
+        ]);
+
+        $products = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $products[] = [
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'description' => $row['description'],
+                'price' => $row['price'],
+                'stock'  => $row['stock'],
+                'image'  => $row['image'],
+                'sold'  => $row['sold'],
+            ];
+        }
+        return $products;
+    }
+
+    /**
+     * @param string $search
+     * @return integer $numberOfRow by search
+     */
+    public function countSearch($search)
+    {
+        $search = "%" . $search . '%';
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) as count FROM products WHERE name LIKE :search;");
+        $stmt->execute([
+            'search' => $search
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['count'];
+    }
+
+    /**
      * @param string|integer $id
      * @return associative array based on condition
      */
@@ -119,7 +166,8 @@ class Product
      * @param string $id
      * @return integer numberofRows deleted
      */
-    public function deleteById($id){
+    public function deleteById($id)
+    {
         $query = 'DELETE FROM products WHERE id = :id ;';
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':id', $id);
@@ -130,7 +178,8 @@ class Product
     /**
      * @return integer $numberOfRow
      */
-    public function count(){
+    public function count()
+    {
         $stmt = $this->pdo->prepare('SELECT COUNT(*) as count FROM products');
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -141,7 +190,8 @@ class Product
      * @param associative $product associatve array new product data
      * @return bool true if success, else false
      */
-    public function update($product) {
+    public function update($product)
+    {
         try {
             $query = 'UPDATE products SET name = :name, description = :description, price = :price, stock = :stock, image = :image WHERE id = :id';
             $stmt = $this->pdo->prepare($query);
