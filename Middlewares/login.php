@@ -15,22 +15,22 @@ if (isset($_POST['login'])) {
 
 
         if (!count($userData)) {
-            setcookie('message', 'username invalid', time() + 3600 * 24, '/');
+            setcookie('message', 'username invalid', time() + 3600, '/');
             echo $_COOKIE['message'];
             header("location: /Views/Login.php");
         } else {
             if (password_verify($password, $userData[0]['password'])) {
-                setcookie('message', "login success, welcome $username", time() + 3600 * 24, '/');
+                setcookie('message', "login success, welcome $username", time() + 3600, '/');
                 // GENERATE TOKEN
-                setcookie('userLoggedIn', $username, time() + 3600 * 24, '/');
-                setcookie('token', md5($username . SECRET_WORD) , time() + 3600 * 24, '/');
+                setcookie('userLoggedIn', $username, time() + 3600, '/');
+                setcookie('token', md5($username . SECRET_WORD) , time() + 3600, '/');
                 // Save username and role to session
                 session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $userData[0]['role'];
                 header("location: /index.php");
             } else {
-                setcookie('message',  "password invalid", time() + 3600 * 24, '/');
+                setcookie('message',  "password invalid", time() + 3600, '/');
                 header("location: /Views/login.php");
             }
         }

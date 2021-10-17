@@ -24,11 +24,11 @@ include_once('../config.php');
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     session_start();
     if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'admin') {
-        setcookie('message', 'Prohibited', time() + 3600 * 24, '/');
+        setcookie('message', 'Prohibited', time() + 3600, '/');
         header("location: /Views/Login.php");
     }
 } else {
-    setcookie('message', 'Prohibited', time() + 3600 * 24, '/');
+    setcookie('message', 'Prohibited', time() + 3600, '/');
     header("location: /Views/Login.php");
 }
 
