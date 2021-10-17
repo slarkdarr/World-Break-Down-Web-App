@@ -3,10 +3,15 @@ include_once('../database/SQLiteConnection.php');
 include_once('../Model/Product.php');
 include_once('../config.php');
 
-
 // Validate logged in
-if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
-    setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
+if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
+    session_start();
+    if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'admin') {
+        setcookie('message', 'Prohibited', time() + 3600 * 24, '/');
+        header("location: /Views/Login.php");
+    }
+} else {
+    setcookie('message', 'Prohibited', time() + 3600 * 24, '/');
     header("location: /Views/Login.php");
 }
 
@@ -17,7 +22,6 @@ if (isset($_POST['create'])) {
         'price' => $_POST['price'],
         'stock' => $_POST['stock'],
     ];
-
 
     // Uploaded file
     $filename =  uniqid() . '_' . $_FILES['file']['name'];

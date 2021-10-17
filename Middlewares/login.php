@@ -3,7 +3,6 @@ include_once('../database/SQLiteConnection.php');
 include_once('../Model/User.php');
 include_once('../config.php');
 
-
 if (isset($_POST['login'])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -22,8 +21,13 @@ if (isset($_POST['login'])) {
         } else {
             if (password_verify($password, $userData[0]['password'])) {
                 setcookie('message', "login success, welcome $username", time() + 3600 * 24, '/');
-                setcookie('username', $username, time() + 3600 * 24, '/');
-                setcookie('role', $userData[0]['role'], time() + 3600 * 24, '/');
+                // GENERATE TOKEN
+                setcookie('userLoggedIn', $username, time() + 3600 * 24, '/');
+                setcookie('token', md5($username . SECRET_WORD) , time() + 3600 * 24, '/');
+                // Save username and role to session
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['role'] = $userData[0]['role'];
                 header("location: /index.php");
             } else {
                 setcookie('message',  "password invalid", time() + 3600 * 24, '/');
