@@ -4,8 +4,17 @@ include_once('../Model/Product.php');
 include_once('../config.php');
 
 // Validate logged in
-if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
-    setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
+session_start();
+if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
+    if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'admin') {
+        setcookie('message', 'Prohibited', time() + 3600, '/');
+        header("location: /Views/Login.php");
+    }
+} else {
+    // Destroy session
+    session_unset();
+    session_destroy();
+    setcookie('message', 'Prohibited', time() + 3600, '/');
     header("location: /Views/Login.php");
 }
 
@@ -52,10 +61,10 @@ if (isset($_POST['edit'])) {
     if ($pdo != null) {
         $bool = $Product->update($newProduct);
         if ($bool) {
-            setcookie('message', 'Variant ' . $newProduct['name'] . ' updated successfully', time() + 3600 * 24, '/');
+            setcookie('message', 'Variant ' . $newProduct['name'] . ' updated successfully', time() + 3600, '/');
             header("location: /index.php");
         } else {
-            setcookie('message', 'Variant ' . $newProduct['name'] . ' fail to create', time() + 3600 * 24, '/');
+            setcookie('message', 'Variant ' . $newProduct['name'] . ' fail to create', time() + 3600, '/');
             header("location: /index.php");
         }
     } else {

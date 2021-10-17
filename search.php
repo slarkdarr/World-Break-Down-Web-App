@@ -6,10 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="Assets/css/index.css" />
-    <link rel="stylesheet" href="../Assets/css/footer.css">
-    <link rel="stylesheet" href="../Assets/css/navbar.css">
-    <link rel="stylesheet" href="../Assets/css/style.css">
-    <link href="//db.onlinewebfonts.com/c/4a47df713b67c858644e569c4977de19?family=Dorayaki" rel="stylesheet" type="text/css"/>
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
 
@@ -21,18 +17,10 @@ include_once('config.php');
 include_once('database/SQLiteConnection.php');
 include_once('Model/Product.php');
 
-function alert($msg)
-{
-    echo "<script type='text/javascript'>alert('$msg');</script>";
-    setcookie('message', '', time() - 3600, '/');
-}
 // Validate logged in
 session_start();
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) === $_COOKIE['token']) {
-        if (isset($_COOKIE['message'])) {
-            alert($_COOKIE['message']);
-        }
         $role = $_SESSION['role'];
     }
 } else {
@@ -41,6 +29,13 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     session_destroy();
     setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600, '/');
     header("location: /Views/Login.php");
+}
+
+// Check search for pagination ?search=
+if (!isset($_GET['search']) || (strlen($_GET['search']) <= 2)) {
+    header("location: /index.php");
+} else {
+    $search = $_GET['search'];
 }
 
 // Check page for pagination ?page=
@@ -58,9 +53,9 @@ $databasePath = 'database/doraemon.sqlite';
 $pdo = (new SQLiteConnection())->connect($databasePath);
 $product = new Product($pdo);
 // Get number of pages from database
-$countData = $product->count();
+$countData = $product->countSearch($search);
 $numberOfPage = ceil($countData / $resultsPerPage);
-$products = $product->getPaginated($pageResult, $resultsPerPage);
+$products = $product->getPaginatedSearch($pageResult, $resultsPerPage, $search);
 ?>
 
 <body>
@@ -79,7 +74,7 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
             <section class="product-section">
                 <div class="products" id="products">
                     <?php foreach ($products as $product) { ?>
-                        <a href='Views/Product.php?id=<?php echo $product['id']; ?>' id='<?= $product['id'] ?>'>
+                        <a href='product.php?id=<?php echo $product['id']; ?>' id='<?= $product['id'] ?>'>
                             <div class='product-card' id='<?= $product['id'] ?>'>
                                 <div class='product-image'>
                                     <img src='<?= $product['image'] ?>' alt='<?= $product['name'] ?>' />
@@ -102,7 +97,7 @@ $products = $product->getPaginated($pageResult, $resultsPerPage);
             <?php if ($numberOfPage >= $page) { ?>
                 <div class="pagination">
                     <?php for ($i = 1; $i <= $numberOfPage; $i++) { ?>
-                        <a href="?page=<?php echo $i; ?>" class=<?php echo ($page == $i) ? 'active'  : '' ?>><?= $i ?></a>
+                        <a href="?search=<?php echo $search; ?>&page=<?php echo $i; ?>" class=<?php echo ($page == $i) ? 'active'  : '' ?>><?= $i ?></a>
                     <?php  } ?>
                 </div>
             <?php  } ?>

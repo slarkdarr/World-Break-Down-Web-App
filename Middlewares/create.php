@@ -3,10 +3,18 @@ include_once('../database/SQLiteConnection.php');
 include_once('../Model/Product.php');
 include_once('../config.php');
 
-
 // Validate logged in
-if (!isset($_COOKIE['username']) || !isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
-    setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600 * 24, '/');
+session_start();
+if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
+    if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'admin') {
+        setcookie('message', 'Prohibited', time() + 3600, '/');
+        header("location: /Views/Login.php");
+    }
+} else {
+    // Destroy session
+    session_unset();
+    session_destroy();
+    setcookie('message', 'Prohibited', time() + 3600, '/');
     header("location: /Views/Login.php");
 }
 
@@ -17,7 +25,6 @@ if (isset($_POST['create'])) {
         'price' => $_POST['price'],
         'stock' => $_POST['stock'],
     ];
-
 
     // Uploaded file
     $filename =  uniqid() . '_' . $_FILES['file']['name'];
@@ -44,10 +51,10 @@ if (isset($_POST['create'])) {
             $Product = new Product($pdo);
             $bool = $Product->insert($newProduct);
             if ($bool) {
-                setcookie('message', 'New Variant ' . $newProduct['name'] . ' created successfully', time() + 3600 * 24, '/');
+                setcookie('message', 'New Variant ' . $newProduct['name'] . ' created successfully', time() + 3600, '/');
                 header("location: /index.php");
             } else {
-                setcookie('message', 'New Variant ' . $newProduct['name'] . ' fail to create', time() + 3600 * 24, '/');
+                setcookie('message', 'New Variant ' . $newProduct['name'] . ' fail to create', time() + 3600, '/');
                 header("location: /index.php");
             }
         } else {

@@ -8,6 +8,11 @@
   margin-bottom: 2rem;
 }
 
+.content h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
 .add-product {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
