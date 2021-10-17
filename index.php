@@ -23,15 +23,18 @@ function alert($msg)
     setcookie('message', '', time() - 3600, '/');
 }
 // Validate logged in
+session_start();
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) === $_COOKIE['token']) {
         if (isset($_COOKIE['message'])) {
             alert($_COOKIE['message']);
         }
-        session_start();
         $role = $_SESSION['role'];
     }
 } else {
+    // Destroy session
+    session_unset();
+    session_destroy();
     setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600, '/');
     header("location: /Views/Login.php");
 }
