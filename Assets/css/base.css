@@ -1,26 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
-/* @import "navbar.css";
-@import "footer.css"; */
+@import "navbar.css";
+@import "footer.css";
 :root {
-    --primary: #316B83;
-    --secondary: #6D8299;
-    --third-color: #8CA1A5;
-    --forth-color: #D5BFBF;
-    --text-color: #f3f2c9;
-    --background-plain: #ffffff;
-    --background-grey: rgb(244, 244, 244);
+  --primary: #316b83;
+  --secondary: #6d8299;
+  --third-color: #8ca1a5;
+  --forth-color: #d5bfbf;
+  --text-color: #f3f2c9;
+  --background-plain: #ffffff;
+  --background-grey: rgb(244, 244, 244);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
-    background: var(--background-plain);
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
+  background: var(--background-plain);
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
 }
