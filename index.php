@@ -35,7 +35,6 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     // Destroy session
     session_unset();
     session_destroy();
-    setcookie('message', 'Login to view Doraemon Ecommerce', time() + 3600, '/');
     header("location: /Views/Login.php");
 }
 

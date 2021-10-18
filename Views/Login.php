@@ -1,5 +1,6 @@
 <?php
 include_once('../config.php');
+
 if (isset($_COOKIE['message'])) {
     alert($_COOKIE['message']);
 }
@@ -15,9 +16,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     header("location: /index.php");
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
