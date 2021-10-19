@@ -34,12 +34,12 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     header("location: /Views/Login.php");
 }
 
-// Validate logged in
+// Validate id exists
 if (!isset($_GET['id'])) {
     header("location: /index.php");
 } else {
     // Sqlite conn
-    $databasePath = '../database/doraemon.sqlite';
+    $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
     if ($pdo !== null) {
         $id = $_GET['id'];
