@@ -51,7 +51,7 @@ $resultsPerPage = 10;
 $pageResult = ($page - 1) * $resultsPerPage;
 
 // Sqlite conn
-$databasePath = 'database/doraemon.sqlite';
+$databasePath = 'database/' . DATABASE_NAME . '.sqlite';
 $pdo = (new SQLiteConnection())->connect($databasePath);
 $product = new Product($pdo);
 // Get number of pages from database
