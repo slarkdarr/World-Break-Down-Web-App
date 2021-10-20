@@ -31,31 +31,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     header("location: /Views/Login.php");
 }
 
-// Check search for pagination ?search=
-if (!isset($_GET['search']) || (strlen($_GET['search']) <= 2)) {
-    header("location: /index.php");
-} else {
-    $search = $_GET['search'];
-}
 
-// Check page for pagination ?page=
-if (!isset($_GET['page'])) {
-    $page = 1;
-} else {
-    $page = $_GET['page'];
-}
-
-$resultsPerPage = 10;
-$pageResult = ($page - 1) * $resultsPerPage;
-
-// Sqlite conn
-$databasePath = 'database/' . DATABASE_NAME . '.sqlite';
-$pdo = (new SQLiteConnection())->connect($databasePath);
-$product = new Product($pdo);
-// Get number of pages from database
-$countData = $product->countSearch($search);
-$numberOfPage = ceil($countData / $resultsPerPage);
-$products = $product->getPaginatedSearch($pageResult, $resultsPerPage, $search);
 ?>
 
 <body>
@@ -65,45 +41,23 @@ $products = $product->getPaginatedSearch($pageResult, $resultsPerPage, $search);
 
     <!-- Content -->
     <div class="content">
-        <?php if (count($products) > 0) { ?>
-            <?php if ($role === 'admin') { ?>
-                <div class="add-product">
-                    <a href="Views/CreateProduct.php" class="button"><i class="fas fa-plus"></i>Variant</a>
-                </div>
-            <?php } ?>
-            <section class="product-section">
-                <div class="products" id="products">
-                    <?php foreach ($products as $product) { ?>
-                        <a href='product.php?id=<?php echo $product['id']; ?>' id='<?= $product['id'] ?>'>
-                            <div class='product-card' id='<?= $product['id'] ?>'>
-                                <div class='product-image'>
-                                    <img src='<?= $product['image'] ?>' alt='<?= $product['name'] ?>' />
-                                </div>
-                                <div class='product-info'>
-                                    <div class='title text' id='title-item'><?= $product['name'] ?></div>
-                                    <div class='sub-info'>
-                                        <div class='price'>Rp<?= $product['price'] ?></div>
-                                        <div class='rating'>
-                                            Terjual <?= $product['sold'] ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    <?php } ?>
-                </div>
-            </section>
 
-            <?php if ($numberOfPage >= $page) { ?>
-                <div class="pagination">
-                    <?php for ($i = 1; $i <= $numberOfPage; $i++) { ?>
-                        <a href="?search=<?php echo $search; ?>&page=<?php echo $i; ?>" class=<?php echo ($page == $i) ? 'active'  : '' ?>><?= $i ?></a>
-                    <?php  } ?>
-                </div>
-            <?php  } ?>
-        <?php } else { ?>
-            <h1>No data available</h1>
+        <?php if ($role === 'admin') { ?>
+            <div class="add-product">
+                <a href="Views/CreateProduct.php" class="button"><i class="fas fa-plus"></i>Variant</a>
+            </div>
         <?php } ?>
+
+        <section class="product-section">
+            <div class="products" id="products">
+                <!-- Data by dashboard.php here -->
+            </div>
+        </section>
+
+        <div class="pagination" id="pagination_link">
+            <!-- Pagination link -->
+        </div>
+
     </div>
     <!-- end content -->
 
@@ -112,6 +66,30 @@ $products = $product->getPaginatedSearch($pageResult, $resultsPerPage, $search);
     <?php include 'partials/footer.php'; ?>
     <!-- End Footer -->
 
+
+    <script type="text/javascript">
+        load_data('',1);
+
+        function load_data(query='',page_number = 1) {
+            var form_data = new FormData();
+            form_data.append('query', query)
+            form_data.append('page', page_number);
+
+            var ajax = new XMLHttpRequest();
+            ajax.open('POST', 'Middlewares/search.php');
+            ajax.send(form_data);
+
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var response = JSON.parse(ajax.responseText);
+                    var products = document.getElementById('products');
+                    var pagination = document.getElementById('pagination_link');
+                    products.innerHTML = response.products;
+                    pagination.innerHTML = response.pagination;
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
