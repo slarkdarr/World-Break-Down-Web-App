@@ -1,0 +1,11 @@
+@import url("base.css");
+.detail-wrapper {
+    display: flex;
+}
+  
+.detail-wrapper > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+}
