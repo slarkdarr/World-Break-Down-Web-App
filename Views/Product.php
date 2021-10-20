@@ -88,26 +88,36 @@ if (!isset($_GET['id'])) {
                     </div>
                     <div class="detail-action">
                         <?php
+                            $changeButton = "<a href='ChangeStock.php?id=".$id."'>";
                             if ($role=='admin') {
-                                echo "<a href='#'>Ubah Stok";
+                                $changeButton=$changeButton."Ubah Stok</a>";
                             }
                             else {
-                                echo "<a href='#'>Beli";
+                                $changeButton=$changeButton."Beli</a>";
                             }
+                            echo $changeButton
                         ?>
                     </div>
                     <?php
                             if ($role=='admin') {
                     ?>
                     <div class="sub-action">
-                        <a href="">Edit</a>
+                        <a href="EditStock.php?id".<?php echo $id ?>>Edit</a>
                         <a href="">Delete</a>
+                        <!-- <button onclick="document.getElementById('modal').style.display='block'" class="w3-button w3-black">Open Modal</button> -->
                     </div>
                     <?php } ?>
                 </div>
             </div>
+            <!-- <div id="modal" class="detail-modal">
+                <div class="detail-modal-content">
+                    <div class="detail-modal-container">
+                        <span onclick="document.getElementById('modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                        <?php include 'DeleteConfirmation.php'; ?>
+                    </div>
+                </div>
+            </div> -->
         </div>
-
     </div>
     <!-- end content -->
 
