@@ -25,7 +25,7 @@ if (isset($_POST['buy'])) {
     $Product = new Product($pdo);
     $currentProduct = $Product->whereId($_POST['id']);
 
-    $newStock = 'stock' => $_POST['stock'];
+    $newStock = $_POST['stock'];
 
     if ($pdo != null) {
         $bool = $Product->changeStock($newStock, $currentProduct['id']);
@@ -43,5 +43,3 @@ if (isset($_POST['buy'])) {
 } else {
     header("location: /index.php");
 }
-
->

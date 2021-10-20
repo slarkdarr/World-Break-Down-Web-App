@@ -68,10 +68,12 @@ if (!isset($_GET['id'])) {
     <div class="content">
         <div class="wrapper">
             <h3 class="title">CHANGE STOCK DORAYAKI</h3>
+            <p>Stock saat ini</p>
+            <div id="stock" data-id="<?php echo $id ?>" class="stock">30</div>
             <form class="form" action="../Middlewares/changestock.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
                     <label for="price">Stock</label>
-                    <input type="number" min='0' id="stock" name="stock" value="<?php echo $item['stock'] ?>" required>
+                    <input type="number" min='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
 
                 <!-- <input type="hidden" id="id" name="id" value="<?php echo $id ?>"> -->
@@ -90,7 +92,25 @@ if (!isset($_GET['id'])) {
 
     <!-- End  Footer -->
 
-
+    <script type="text/javascript">
+        function loadStock() {
+            let stock = document.getElementById("stock");
+            let id = stock.getAttribute('data-id');
+            let avail = document.getElementById('available-stock');
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    const data = JSON.parse(xhttp.responseText);
+                    stock.innerHTML = data.stock;
+                    avail.min = -data.stock;
+                    console.log(-data.stock)
+                }
+            };
+            xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
+            xhttp.send();
+        }
+        setInterval(loadStock, 5000);
+    </script>
 </body>
 
 </html>
