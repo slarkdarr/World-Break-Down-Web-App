@@ -23,18 +23,20 @@ class History
 
     /**
      * Insert a new history into the histories table
-     * @param array $history consist of (user_id, product_id, quantity, total_price)
+     * @param array $history consist of (user_id, username, product_id, product_name, quantity, total_price)
      * @return boolean success
      */
     public function insert($history)
     {
         try {
 
-            $query = 'INSERT INTO histories (user_id, product_id, quantity, total_price, date) VALUES (:user_id, :product_id, :quantity, :total_price, datetime("now", "localtime"));';
+            $query = 'INSERT INTO histories (user_id, username, product_id, product_name, quantity, total_price, date) VALUES (:user_id, :username, :product_id, :product_name, :quantity, :total_price, datetime("now", "localtime"));';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([
                 ':user_id' => $history['user_id'],
+                ':username' => $history['username'],
                 ':product_id' => $history['product_id'],
+                ':product_name' => $history['product_name'],
                 ':quantity'  => $history['quantity'],
                 ':total_price' => $history['total_price'],
             ]);
@@ -55,7 +57,9 @@ class History
             $histories[] = [
                 'id' => $row['id'],
                 'user_id' => $row['user_id'],
+                'username' => $row['username'],
                 'product_id' => $row['product_id'],
+                'product_name' => $row['product_name'],
                 'quantity'  => $row['quantity'],
                 'total_price' => $row['total_price'],
                 'date'  => $row['date'],
@@ -81,7 +85,9 @@ class History
             $histories[] = [
                 'id' => $row['id'],
                 'user_id' => $row['user_id'],
+                'username' => $row['username'],
                 'product_id' => $row['product_id'],
+                'product_name' => $row['product_name'],
                 'quantity'  => $row['quantity'],
                 'total_price' => $row['total_price'],
                 'date'  => $row['date'],
@@ -111,7 +117,7 @@ class History
      */
     public function whereUserId($userId)
     {
-        $query = 'SELECT *, u.id as uid FROM histories INNER JOIN users u ON u.id = histories.user_id WHERE user_id = :user_id ;';
+        $query = 'SELECT * FROM histories WHERE user_id = :user_id ;';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':user_id' => $userId
@@ -124,6 +130,7 @@ class History
                 'user_id' => $row['user_id'],
                 'username' => $row['username'],
                 'product_id' => $row['product_id'],
+                'product_name' => $row['product_name'],
                 'quantity'  => $row['quantity'],
                 'total_price' => $row['total_price'],
                 'date'  => $row['date'],
@@ -140,7 +147,7 @@ class History
      */
     public function whereProductId($productId)
     {
-        $query = 'SELECT *, p.id as pid, p.name as product_name FROM histories INNER JOIN products p ON p.id = histories.product_id WHERE product_id = :product_id ;';
+        $query = 'SELECT * FROM histories WHERE product_id = :product_id ;';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':product_id' => $productId
@@ -150,9 +157,10 @@ class History
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $histories[] = [
                 'id' => $row['id'],
-                'product_id' => $row['pid'],
-                'product_name' => $row['product_name'],
                 'user_id' => $row['user_id'],
+                'username' => $row['username'],
+                'product_id' => $row['product_id'],
+                'product_name' => $row['product_name'],
                 'quantity'  => $row['quantity'],
                 'total_price' => $row['total_price'],
                 'date'  => $row['date'],

@@ -21,7 +21,9 @@ $tables = [
     'histories' => 'DROP TABLE IF EXISTS histories; CREATE TABLE IF NOT EXISTS histories (
         id INTEGER PRIMARY KEY NOT NULL,
         user_id INTEGER,
+        username TEXT,
         product_id INTEGER,
+        product_name TEXT,
         quantity INTEGER,
         total_price INTEGER,
         date TEXT,
@@ -55,13 +57,6 @@ try {
         ':password' => password_hash('user123', PASSWORD_DEFAULT),
         ':role'  => 'user'
     ]);
-    // $db->exec('INSERT INTO users (email, username, password, role) VALUES ("jafar@jafar.com", "halogais", "123456", "admin");');
-    // $db->exec('INSERT INTO products (name, description, price, stock, image)  VALUES ("dorayaki", "dorayaki sedap", 30000, 100, "image");');
-    // $datetime = $timestamp = date('Y-m-d H:i:s');
-    // echo $datetime;
-    // $hist = $db->prepare('INSERT INTO histories (user_id, product_id, quantity, total_price, date) VALUES (1,1,10, 300000, :datetime);');
-    // $hist->bindValue(':datetime', $datetime);
-    // $hist->execute();
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
