@@ -66,7 +66,6 @@ if (isset($_POST['page'])) {
             }
             $page_array[] = '...';
             $page_array[] = $numberOfPage;
-
         } else {
             $end_limit = $numberOfPage - 3;
             if ($page > $end_limit) {
@@ -94,35 +93,36 @@ if (isset($_POST['page'])) {
         }
     }
 
+    if (isset($page_array)) {
+        for ($count = 0; $count < count($page_array); $count++) {
+            if ($page == $page_array[$count]) {
+                $page_link .= "<a href='#' class='active'>{$page_array[$count]}</a>";
 
-    for ($count = 0; $count < count($page_array); $count++) {
-        if ($page == $page_array[$count]) {
-            $page_link .= "<a href='#' class='active'>{$page_array[$count]}</a>";
+                $previous_id = $page_array[$count] - 1;
 
-            $previous_id = $page_array[$count] - 1;
+                if ($previous_id > 0) {
+                    $previousLink =  "<a href='javascript:load_data({$previous_id})'>&laquo;</a>";
+                } else {
+                    $previousLink =  "<a class='disabled' href=''>&laquo;</a>";
+                }
 
-            if ($previous_id > 0) {
-                $previousLink =  "<a href='javascript:load_data({$previous_id})'>&laquo;</a>";
+                $next_id = $page_array[$count] + 1;
+                if ($next_id > $numberOfPage) {
+                    $next_link = "<a class='disabled' href='#'>&raquo;</a>";
+                } else {
+                    $next_link =   "<a href='javascript:load_data({$next_id})'>&raquo;</a>";
+                }
             } else {
-                $previousLink =  "<a class='disabled' href=''>&laquo;</a>";
-            }
-
-            $next_id = $page_array[$count] + 1;
-            if ($next_id > $numberOfPage) {
-                $next_link = "<a class='disabled' href='#'>&raquo;</a>";
-            } else {
-                $next_link =   "<a href='javascript:load_data({$next_id})'>&raquo;</a>";
-            }
-        } else {
-            if ($page_array[$count] == '...'){
-                $page_link .= "<a class='disabled' href='#'>...</a>";
-            } else {
-                $page_link .= "<a href='javascript:load_data({$page_array[$count]})'>{$page_array[$count]}</a>";
+                if ($page_array[$count] == '...') {
+                    $page_link .= "<a class='disabled' href='#'>...</a>";
+                } else {
+                    $page_link .= "<a href='javascript:load_data({$page_array[$count]})'>{$page_array[$count]}</a>";
+                }
             }
         }
-    }
 
-    $paginationHtml .= $previousLink . $page_link . $next_link;
+        $paginationHtml .= $previousLink . $page_link . $next_link;
+    }
 
     $result = [
         'products' => $productHtml,

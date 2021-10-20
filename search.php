@@ -31,6 +31,13 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     header("location: /Views/Login.php");
 }
 
+// Check search for pagination ?keyword=
+if (!isset($_GET['keyword']) || (strlen($_GET['keyword']) < 2)) {
+    header("location: /index.php");
+} else {
+    $keyword = $_GET['keyword'];
+}
+
 
 ?>
 
@@ -49,7 +56,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
         <?php } ?>
 
         <section class="product-section">
-            <div class="products" id="products">
+            <div class="products" id="products" data-id="<?php echo $keyword ?>">
                 <!-- Data by dashboard.php here -->
             </div>
         </section>
@@ -68,9 +75,11 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
 
 
     <script type="text/javascript">
-        load_data('',1);
+        var products = document.getElementById('products');
+        let keyword = products.getAttribute('data-id');
+        load_data(keyword, 1);
 
-        function load_data(query='',page_number = 1) {
+        function load_data(query = '', page_number = 1) {
             var form_data = new FormData();
             form_data.append('query', query)
             form_data.append('page', page_number);
@@ -82,7 +91,6 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     var response = JSON.parse(ajax.responseText);
-                    var products = document.getElementById('products');
                     var pagination = document.getElementById('pagination_link');
                     products.innerHTML = response.products;
                     pagination.innerHTML = response.pagination;
