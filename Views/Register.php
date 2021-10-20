@@ -55,7 +55,7 @@ function alert($msg)
 
     <body>
         <form method="POST" action="insertdata.php" onsubmit="return checkUsername();">
-            <input type="text" name="username" id="UserName" onkeyup="checkname();">
+            <input type="text" name="username" id="UserName" onkeyup="checkUsername();">
             <span id="username_status"></span>
             <br>
             <input type="text" name="useremail" id="UserEmail">

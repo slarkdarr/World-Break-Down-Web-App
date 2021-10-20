@@ -208,4 +208,19 @@ class Product
             return false;
         }
     }
+
+    public function changeStock($stock, $id)
+    {
+        try {
+            $query = 'UPDATE products SET stock = :stock WHERE id = :id';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                ':stock'  => 'stock',
+                ':id' => 'id'
+            ]);
+            return true;
+        } catch (\PDOException $Exception) {
+            return false;
+        }
+    }
 }
