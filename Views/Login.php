@@ -62,6 +62,7 @@ if (isset($_SESSION['username'])) {
                             </div>
                         </form>
                     </div>
+                    <p class="subtext-login">Do not have an Account?<a href="Register.php"><span>Register Here</span></a></p>
                 </div>
             </div>
         </div>
