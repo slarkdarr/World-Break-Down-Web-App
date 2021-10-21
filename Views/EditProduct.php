@@ -72,12 +72,12 @@ if (!isset($_GET['id'])) {
 
                 <div class="input-field">
                     <label for="name">Product Variant</label>
-                    <input type="text" id="name" name="name" placeholder="Variant of product here .." value="<?php echo $item['name'] ?>" required>
+                    <input type="text" id="name" name="name" placeholder="Variant of product here .." maxlength="255" value="<?php echo $item['name'] ?>" required>
                 </div>
 
                 <div class="input-field">
                     <label for="description">Description</label>
-                    <textarea class="textarea" name="description" id="description" cols="30" rows="5" placeholder="Description goes here ..." required><?php echo $item['description'] ?> </textarea>
+                    <textarea class="textarea" name="description" id="description" cols="30" rows="5" maxlength="255" placeholder="Description goes here ..." required><?php echo $item['description'] ?> </textarea>
                 </div>
 
                 <div class="input-field">
