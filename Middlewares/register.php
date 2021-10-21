@@ -3,39 +3,31 @@ include_once('../database/SQLiteConnection.php');
 include_once('../Model/User.php');
 include_once('../config.php');
 
-function countDbRows($pdo, $checkdataquery)
-{
-    $counting = "SELECT COUNT(*) FROM ($checkdataquery)";
-    $count = $pdo->query($counting);
-
-    return $count;
-}
 
 if (isset($_POST['register'])) {
-    $databasePath = '../database/doraemon.sqlite';
+    $username = $_POST['username'];
+    $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
 
     if ($pdo != null) {
-        $user = new User($pdo);
+        $User = new User($pdo);
+        $userData = $User->whereUsername($username);
 
-        if (isset($_POST['username'])) {
-            $username = $_POST['username'];
-
-            $checkdata = "SELECT username FROM users WHERE username='$username'";
-
-            $query = $pdo->query($checkdata);
-
-            if (countDbRows($pdo, $checkdata) > 0) {
-                setcookie('message', 'Username already exists!', time() + 3600 * 24, '/');
-                echo $_COOKIE['message'];
-                header("location:" . URL . "Views/Register.php");
-            } else {
-                // $user->insert();
-                setcookie('message', 'Register success! Welcome $username', time() + 3600 * 24, '/');
-                echo $_COOKIE['message'];
-                setcookie('username', $username, time() + 3600 * 24, '/');
-                header("location:" . URL . "index.php");
-            }
+        if (!count($userData)) {
+            setcookie('message', 'Username already exists!', time() + 3600 * 24, '/');
+            echo $_COOKIE['message'];
+            header("location:" . URL . "Views/Register.php");
+        } else {
+            $User->insert();
+            setcookie('message', `Register success! Welcome $username!`, time() + 3600 * 24, '/');
+            // Generate token
+            setcookie('userLoggedIn', $username, time() + 3600, '/');
+            setcookie('token', md5($username . SECRET_WORD) , time() + 3600, '/');
+            // Save username and role to session
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $userData[0]['role'];
+            header("location: /index.php");
         }
     } else {
         echo "Couldn't connect to the SQLite Database!";

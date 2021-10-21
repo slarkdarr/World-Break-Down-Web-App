@@ -209,6 +209,11 @@ class Product
         }
     }
 
+    /**
+     * @param associative $stock associative product stock
+     * @param associative $id associative product id
+     * @return bool true if success, else false
+     */
     public function changeStock($stock, $id)
     {
         try {
