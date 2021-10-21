@@ -10,14 +10,6 @@ $pdo = (new SQLiteConnection())->connect($databasePath);
 
 if ($pdo != null) {
     $User = new User($pdo);
-    // $newUser = [
-    //     'email' => 'user@user.co.id',
-    //     'username' => 'user',
-    //     'password' => 'user123',
-    //     'role' => 'user'
-    // ];
-    // $User->insert($newUser);
-
     $userData = $User->get();
     $userData = $User->whereId(1);
 
@@ -34,41 +26,32 @@ if ($pdo != null) {
         $Product->insert($newProduct);
     }
 
-
-
-    $productData = $Product->get();
-
+    $products = $Product->get();
     $history = new History($pdo);
-
-    // $history->insert([
-    //     'user_id' => 1,
-    //     'product_id' => 1,
-    //     'quantity' => 3,
-    //     'total_price' => 30000
-    // ]);
-    $historyData = $history->whereProductId(1);
+    $counter = 0;
+    foreach($products as $product) {
+        $quantity = rand(1,10);
+        $user_id = rand(1,2);
+        $username = $user_id == 1 ? 'admin' : 'user';
+        $newHistory = [
+            'user_id' => $user_id,
+            'username' => $username,
+            'product_id' => $product['id'],
+            'product_name' => $product['name'],
+            'quantity' => $quantity,
+            'total_price' => $product['price'] * $quantity,
+        ];
+        $history->insert($newHistory);
+        $counter += 1;
+        if ($counter == 10){
+            break;
+        }
+    }
 } else
     echo 'Whoops, could not connect to the SQLite database!';
 ?>
 
 <body>
-    <?php if (sizeof($userData) > 0) { ?>
-        <?php foreach ($userData as $val) { ?>
-            <?php foreach ($val as $key => $value) { ?>
-                <p><?= $key . '=>' . $value ?></p>
-    <?php }
-        }
-    } ?>
-
-
-    <?php if (sizeof($historyData) > 0) { ?>
-        <?php foreach ($historyData as $val) { ?>
-            <?php foreach ($val as  $key => $value) { ?>
-                <p><?= $key . '=>' . $value  ?></p>
-    <?php }
-        }
-    } ?>
-
-    <img src="<?php echo $productData[0]['image'] ?>" alt="">
+    <p>Seed successfully!</p>
 
 </body>
