@@ -4,10 +4,7 @@
     function confirmation() {
         var msg;
         if (confirm('Do you want to delete this dorayaki?')) {
-            msg = "Dorayaki has been deleted!"
-        } else {
-            msg = "Deleting dorayaki has been cancelled!"
+            alert("Dorayaki has been deleted!");
         }
-        alert(msg);
     }
 </script>
