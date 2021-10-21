@@ -103,8 +103,9 @@ if (!isset($_GET['id'])) {
                     ?>
                     <div class="detail-action">
                         <a href="EditStock.php?id".<?php echo $id ?>>Edit</a>
+                    </div>
+                    <div class="detail-action">
                         <a href="">Delete</a>
-                        <!-- <button onclick="document.getElementById('modal').style.display='block'" class="w3-button w3-black">Open Modal</button> -->
                     </div>
                     <?php } ?>
                 </div>

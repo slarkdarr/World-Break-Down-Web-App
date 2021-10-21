@@ -29,6 +29,7 @@
 .detail-action {
     background-color: chocolate;
     border-radius: 20px;
+    margin-top: 10px;
     cursor: pointer;
 }
 
