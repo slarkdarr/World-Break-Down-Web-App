@@ -8,6 +8,40 @@
     margin: 10px;
     padding: 20px;
     font-size: 30px;
+    border-radius: 20px;
+}
+
+.detail-left {
+    width: 70%;
+}
+.detail-image {
+    width: 100%;
+    border-radius: 20px;
+}
+.detail-right {
+    width: 30%;
+    text-align: center;
+}
+.detail-right p {
+    color: black;
+}
+
+.detail-action {
+    background-color: chocolate;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.detail-action a {
+    text-decoration: none;
+    color: wheat;
+}
+
+.detail-action:hover {
+    background-color: wheat;
+}
+.detail-action:hover  a {
+    color: black;
 }
 
 #modal {

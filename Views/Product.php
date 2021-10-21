@@ -75,7 +75,6 @@ if (!isset($_GET['id'])) {
                 <div class="detail-img-wrapper">
                     <img src="../<?php echo $item['image']?>" alt="gambar produk" class="detail-image"> 
                 </div>
-                
             </div>
             <div class="detail-right">
                 <div class="detail-description-wrapper">
@@ -83,8 +82,9 @@ if (!isset($_GET['id'])) {
                     <div class="detail-description-content">
                         <p><?php echo $item['description'] ?></p>
                     </div>
+                    <hr>
                     <div class="detail-price">
-                        <p><?php echo $item['price'] ?></p>
+                        <p><?php echo 'Rp'.$item['price'] ?></p>
                     </div>
                     <div class="detail-action">
                         <?php
@@ -101,7 +101,7 @@ if (!isset($_GET['id'])) {
                     <?php
                             if ($role=='admin') {
                     ?>
-                    <div class="sub-action">
+                    <div class="detail-action">
                         <a href="EditStock.php?id".<?php echo $id ?>>Edit</a>
                         <a href="">Delete</a>
                         <!-- <button onclick="document.getElementById('modal').style.display='block'" class="w3-button w3-black">Open Modal</button> -->
@@ -113,7 +113,7 @@ if (!isset($_GET['id'])) {
                 <div class="detail-modal-content">
                     <div class="detail-modal-container">
                         <span onclick="document.getElementById('modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                        <?php include 'DeleteConfirmation.php'; ?>
+                        
                     </div>
                 </div>
             </div> -->
