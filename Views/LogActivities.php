@@ -44,9 +44,15 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     // Sqlite conn
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
+    $username = $_SESSION['username'];
     if ($pdo !== null) {
         $History = new History($pdo);
-        $item = $History->get();
+        if ($role=='admin') {
+            $item = $History->get();
+        }
+        else {
+            $item = $History->whereUserName($username);
+        }
     //     $id = $_GET['id'];
     //     $Product = new Product($pdo);
     //     $item = $Product->whereId($id);
@@ -81,7 +87,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
                 <?php foreach ($item as $key => $value) { ?>
                     <tr>
                         <td><?php echo $value['date'] ?></td>
-                        <td><?php echo $value['product_name'] ?></td>
+                        <td><?php echo "<a href='Product.php?id={$value['product_id']}' style='text-decoration:none;color:black;'>".$value['product_name'] ?></a></td>
                         <td><?php echo $value['quantity'] ?></td>
                         <td><?php echo $value['total_price'] ?></td>
                         <td><?php echo $value['username'] ?></td>

@@ -139,6 +139,30 @@ class History
         return $histories;
     }
 
+    public function whereUserName($username)
+    {
+        $query = 'SELECT * FROM histories WHERE username = :username;';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':username' => $username
+        ]);
+
+        $histories = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $histories[] = [
+                'id' => $row['id'],
+                'user_id' => $row['user_id'],
+                'username' => $row['username'],
+                'product_id' => $row['product_id'],
+                'product_name' => $row['product_name'],
+                'quantity'  => $row['quantity'],
+                'total_price' => $row['total_price'],
+                'date'  => $row['date'],
+            ];
+        }
+        return $histories;
+    }
+
     /**
      * History belongs to Product
      * Get history based on product_id

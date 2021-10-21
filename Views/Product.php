@@ -76,7 +76,7 @@ if (!isset($_GET['id'])) {
             </div>
             <div class="grid-item">
                 <div class="header">
-                    <a href="home.php" id="back">←</a>
+                    <a href="../index.php" id="back">←</a>
                     <h1 class="headerTitle" id="title"><?php echo $item['name'] ?></h1>
                 </div>
                 <div class="description" id="description">
