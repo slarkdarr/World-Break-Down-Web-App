@@ -9,6 +9,7 @@
     <link href="//db.onlinewebfonts.com/c/4a47df713b67c858644e569c4977de19?family=Dorayaki" rel="stylesheet" type="text/css" />
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../Assets/css/deleteConfirmation.css" />
 
     <title>Jajan.id</title>
 </head>
