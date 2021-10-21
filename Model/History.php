@@ -51,7 +51,7 @@ class History
      */
     public function get()
     {
-        $stmt = $this->pdo->query('SELECT * FROM histories');
+        $stmt = $this->pdo->query('SELECT * FROM histories ORDER BY date ASC;');
         $histories = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $histories[] = [
