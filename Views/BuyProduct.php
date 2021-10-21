@@ -75,6 +75,7 @@ if (!isset($_GET['id'])) {
                     <label for="price">Stock</label>
                     <input type="number" min='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
+                <div id="price"></div>
 
                 <!-- <input type="hidden" id="id" name="id" value="<?php echo $id ?>"> -->
 
@@ -110,6 +111,20 @@ if (!isset($_GET['id'])) {
             xhttp.send();
         }
         setInterval(loadStock, 5000);
+
+        function changePrice() {
+            let avail = document.getElementById('available-stock').value;
+            let price = document.getElementById('available-stock');
+            const data = JSON.parse(xhttp.responseText);
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    price.innerHTML = avail * data.price;
+                }
+            };
+            xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
+            xhttp.send();
+        }
     </script>
 </body>
 

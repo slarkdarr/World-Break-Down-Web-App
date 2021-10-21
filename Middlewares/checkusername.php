@@ -14,9 +14,9 @@ if (isset($_POST['register'])) {
         $userData = $User->whereUsername($username);
 
         if (!count($userData)) {
-            echo 'false';
-        } else {
             echo 'true';
+        } else {
+            echo 'false';
         }
     } else {
         echo 'false';
