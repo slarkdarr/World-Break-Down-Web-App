@@ -92,7 +92,7 @@ if (!isset($_GET['id'])) {
                     <?php if ($role == 'admin') { ?>
                         <a href="ChangeStock.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Change Stock" id="button" /></a>
                         <a href="EditProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Edit Product" id="button" /></a>
-                        <input type="button" name="someAction" value="Delete Stock" id="button" />
+                        <input onclick="document.getElementById('id01').style.display='block'" type="button" name="someAction" value="Delete Stock" id="button" />
                     <?php } ?>
                     <?php if ($role == 'user') { ?>
                         <a href="BuyProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Buy" id="button" /></a>
@@ -103,8 +103,6 @@ if (!isset($_GET['id'])) {
     </div>
 
     <!-- Add role  -->
-    <button onclick="document.getElementById('id01').style.display='block'">Delete</button>
-
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
         <form class="modal-content" action="/action_page.php">
@@ -114,7 +112,7 @@ if (!isset($_GET['id'])) {
 
                 <div class="clearfix">
                     <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                    <button type="button" onclick="del(<?php echo $id ?>)">Delete</button>
                 </div>
             </div>
         </form>
@@ -135,6 +133,10 @@ if (!isset($_GET['id'])) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+        function del(id){
+            document.getElementById('id01').style.display='none';
+            location.href='../Middlewares/delete.php?id='+id;
         }
     </script>
 </body>
