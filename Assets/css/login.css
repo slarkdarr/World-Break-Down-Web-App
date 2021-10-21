@@ -74,7 +74,7 @@
     display: block; 
     width: 100px;
     float: left; 
-    font-size: 1vw !important;
+    font-size: 1rem !important;
   }
   body {
     background-color: #656D4A;
@@ -91,7 +91,9 @@
   @media screen and (max-width: 900px) {
     .grid-container {
       grid-template-columns: auto;
-      width: 100%;
+    }
+    label { 
+      font-size: 16px !important;
     }
     .card-left {
       display: none;
@@ -100,5 +102,6 @@
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;
       background-color: transparent;
+      width: 100%;
     }
   }
