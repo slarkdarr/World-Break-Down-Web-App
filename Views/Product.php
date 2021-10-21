@@ -94,12 +94,13 @@ if (!isset($_GET['id'])) {
                     <input type="button" name="someAction" value="Delete Stock" id="button"/>
                     <?php } ?>
                     <?php if ($role=='user') { ?>
-                        <input type="button" name="someAction" value="Buy" id="button"/>
+                        <a href="BuyProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Buy" id="button"/></a>
                     <?php } ?>
                 </div>
             </div>
         </div>
     </div>
+    <?php include_once '../partials/deleteconfirmation.php';  ?>
     <!-- end content -->
 
 
