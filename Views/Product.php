@@ -102,7 +102,7 @@ if (!isset($_GET['id'])) {
                             if ($role=='admin') {
                     ?>
                     <div class="detail-action">
-                        <a href="EditStock.php?id".<?php echo $id ?>>Edit</a>
+                        <a href="EditProduct.php?id=<?php echo $id ?>">Edit</a>
                     </div>
                     <div class="detail-action">
                         <a href="">Delete</a>
