@@ -1,50 +1,90 @@
 @import url("base.css");
-.detail-wrapper {
-    display: flex;
-}
-  
-.detail-wrapper > div {
-    background-color: #f1f1f1;
-    margin: 10px;
+.grid-container {
+    display: grid;
+    grid-template-columns: 30% auto;
+    
+    padding: 10px;
+    border-radius:15px;
+    width: 80%;
+    margin: 100px auto;
+    background-color: #D5B741;
+    box-shadow: 8px 8px 8px #181818;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
     font-size: 30px;
-    border-radius: 20px;
-}
-
-.detail-left {
-    width: 70%;
-}
-.detail-image {
-    width: 100%;
-    border-radius: 20px;
-}
-.detail-right {
-    width: 30%;
     text-align: center;
-}
-.detail-right p {
-    color: black;
-}
+  }
+  .image-grid {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+  }
 
-.detail-action {
-    background-color: chocolate;
-    border-radius: 20px;
-    margin-top: 10px;
-    cursor: pointer;
-}
 
-.detail-action a {
-    text-decoration: none;
-    color: wheat;
-}
+  img {
+      width:100%;
+  }
+  @media screen and (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: auto;
+    }
+  }
+  .header {
+      display:inline;
+  }
+  .description{
+      text-align:left;
+      margin-top:50px;
+  }
+  #id {
+      position:absolute;
+      text-align:right;
+      text-decoration: none;
+      right:180px;
+      border-radius:100%;
+      border: 1px solid black;
+      padding:10px;
+      background-color:yellow;
+  }
 
-.detail-action:hover {
-    background-color: wheat;
-}
-.detail-action:hover  a {
-    color: black;
-}
+  .footer {
+      margin: 0px auto;
+      margin-top:50px;
+      border-radius:15px;
+      background-color: #CFA987;
+      width:70%;
+      padding-top:20px;
+      padding-bottom:20px;
+      border: 2px solid #181818;
+  }
+  #back {
+      background-color: #D5B741;
+      box-shadow: 5px 5px 8px #181818;
+      border-radius:100%;
+      color:white;
+      text-decoration:none;
+      float: right;
+      padding:10px;
+  }
+
+  #button {
+      margin-top:10px;
+      background-color:#CFA987;
+      border-radius:15px;
+      padding:10px;
+      box-shadow: 2px 2px 8px #181818;
+  }
+  .button-group {
+      display: inline-block;
+  }
+
 
 #modal {
     display: none;
+}
+.description p {
+    font-size: 20px;
 }

@@ -4,7 +4,7 @@
     src: url("//db.onlinewebfonts.com/t/4a47df713b67c858644e569c4977de19.eot");
     src: url("//db.onlinewebfonts.com/t/4a47df713b67c858644e569c4977de19.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/4a47df713b67c858644e569c4977de19.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/4a47df713b67c858644e569c4977de19.woff") format("woff"), url("//db.onlinewebfonts.com/t/4a47df713b67c858644e569c4977de19.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/4a47df713b67c858644e569c4977de19.svg#Dorayaki") format("svg");
 } 
-h3,p {
+footer h3, footer p {
     font-family: "Dorayaki" !important;
     color: white;
 }

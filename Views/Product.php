@@ -70,54 +70,34 @@ if (!isset($_GET['id'])) {
 
     <!-- Content -->
     <div class="content">
-        <div class="detail-wrapper">
-            <div class="detail-left">
-                <div class="detail-img-wrapper">
-                    <img src="../<?php echo $item['image']?>" alt="gambar produk" class="detail-image"> 
-                </div>
+        <div class="grid-container">
+            <div class="grid-item image-grid">
+                <img id="image" src="<?php echo '../'.$item['image']?>" alt="">
             </div>
-            <div class="detail-right">
-                <div class="detail-description-wrapper">
-                    <h1><?php echo $item['name'] ?></h1>
-                    <div class="detail-description-content">
-                        <p><?php echo $item['description'] ?></p>
-                    </div>
-                    <hr>
-                    <div class="detail-price">
-                        <p><?php echo 'Rp'.$item['price'] ?></p>
-                    </div>
-                    <div class="detail-action">
-                        <?php
-                            $changeButton = "<a href='ChangeStock.php?id=".$id."'>";
-                            if ($role=='admin') {
-                                $changeButton=$changeButton."Ubah Stok</a>";
-                            }
-                            else {
-                                $changeButton=$changeButton."Beli</a>";
-                            }
-                            echo $changeButton
-                        ?>
-                    </div>
-                    <?php
-                            if ($role=='admin') {
-                    ?>
-                    <div class="detail-action">
-                        <a href="EditProduct.php?id=<?php echo $id ?>">Edit</a>
-                    </div>
-                    <div class="detail-action">
-                        <a href="">Delete</a>
-                    </div>
+            <div class="grid-item">
+                <div class="header">
+                    <a href="home.php" id="back">←</a>
+                    <h1 class="headerTitle" id="title"><?php echo $item['name'] ?></h1>
+                </div>
+                <div class="description" id="description">
+                    <p><?php echo $item['description'] ?></p>                    
+                    <p>Available : <?php echo $item['stock'] ?></p>
+                    <p>Sold : <?php echo $item['sold'] ?></p>
+                </div>
+                <div class="footer">
+                    <p id="harga">Rp<?php echo $item['price'] ?>,00</p>
+                </div>
+                <div class="button-group">
+                    <?php if ($role=='admin') { ?>
+                    <a href="ChangeStock.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Change Stock" id="button"/></a>
+                    <a href="EditProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Edit Product" id="button"/></a>
+                    <input type="button" name="someAction" value="Delete Stock" id="button"/>
+                    <?php } ?>
+                    <?php if ($role=='user') { ?>
+                        <input type="button" name="someAction" value="Buy" id="button"/>
                     <?php } ?>
                 </div>
             </div>
-            <!-- <div id="modal" class="detail-modal">
-                <div class="detail-modal-content">
-                    <div class="detail-modal-container">
-                        <span onclick="document.getElementById('modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                        
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     <!-- end content -->
