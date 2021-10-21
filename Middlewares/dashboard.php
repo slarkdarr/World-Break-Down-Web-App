@@ -32,7 +32,7 @@ if (isset($_POST['page'])) {
             $productHtml .=  "<a href='Views/Product.php?id={$product['id']}' id='{$product['id']}'>
             <div class='product-card'>
                 <div class='product-image'>
-                    <img src='{$product['image']}' alt='{$product['name']}' />
+                    <img src='{$product["image"]}' alt='{$product['name']}' />
                 </div>
                 <div class='product-info'>
                     <div class='title text' id='title-item'>{$product['name']}</div>
