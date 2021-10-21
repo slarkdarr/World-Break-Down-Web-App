@@ -1,11 +1,11 @@
 @import url("base.css");
 .grid-container {
     display: grid;
-    grid-template-columns: 30% auto;
+    grid-template-columns: 40% auto;
     
     padding: 10px;
     border-radius:15px;
-    width: 80%;
+    width: 90%;
     margin: 100px auto;
     background-color: #D5B741;
     box-shadow: 8px 8px 8px #181818;
