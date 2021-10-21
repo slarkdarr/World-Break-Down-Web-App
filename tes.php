@@ -24,7 +24,7 @@
 
     <!-- Content -->
     <div class="content">
-        <form action="search.php" method="GET">
+        <form action="../search.php" method="GET">
             <input type="text" id="keyword" name="keyword" placeholder="Variant of product here .." minlength="2" required>
             <input type="submit" value="Submit">
         </form>
