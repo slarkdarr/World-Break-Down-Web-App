@@ -6,6 +6,8 @@ include_once('../config.php');
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
 
@@ -16,7 +18,7 @@ if (isset($_POST['register'])) {
         if (!count($userData)) {
             setcookie('message', 'Username already exists!', time() + 3600 * 24, '/');
             echo $_COOKIE['message'];
-            header("location:" . URL . "Views/Register.php");
+            header("location: Views/Register.php");
         } else {
             $User->insert();
             setcookie('message', `Register success! Welcome $username!`, time() + 3600 * 24, '/');

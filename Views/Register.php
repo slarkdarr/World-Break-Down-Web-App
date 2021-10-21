@@ -45,7 +45,7 @@ function alert($msg)
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <div class="form-input">
-                                    <input type="text" id="username" name="username" placeholder="username" required>
+                                    <input onkeyup="checkUsername()" type="text" id="username" name="username" placeholder="username" required>
                                 </div>
                                 <div id="username-not-available" class="username-not-available"></div>
                             </div>
@@ -74,20 +74,22 @@ function alert($msg)
         function checkUsername()
         {
             let username = document.getElementById('username');
+            let userValue = username.value;
             let notAvailUsername = document.getElementById('username-not-available');
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    const data = xhttp.responseText;
-                    if (data === 'true') {
-                        username.style.borderColor="green";
-                    } else {
+                    const data = JSON.parse(xhttp.responseText);
+                    if (data[0]){
                         username.style.borderColor="red";
                         notAvailUsername.innerHTML = "Username is not available!";
+                    } else {
+                        username.style.borderColor="green";
+                        notAvailUsername.innerHTML = "";
                     }
                 }
             };
-            xhttp.open("GET", "../Middlewares/checkusername.php?username=" + username, true);
+            xhttp.open("GET", "../Middlewares/checkusername.php?username=" + userValue, true);
             xhttp.send();
         }
     </script>
