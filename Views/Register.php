@@ -45,9 +45,9 @@ function alert($msg)
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <div class="form-input">
-                                    <input onkeyup="checkUsername()" type="text" id="username" name="username" placeholder="username" required>
+                                    <input onkeyup="checkUsername()" pattern="^[a-zA-Z0-9_]*$" type="text" id="username" name="username" placeholder="username" required>
+                                    <div id="username-not-available" class="username-not-available"></div>
                                 </div>
-                                <div id="username-not-available" class="username-not-available"></div>
                             </div>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
@@ -74,6 +74,7 @@ function alert($msg)
         function checkUsername()
         {
             let username = document.getElementById('username');
+            console.log(username.checkValidity())
             let userValue = username.value;
             let notAvailUsername = document.getElementById('username-not-available');
             let xhttp = new XMLHttpRequest();
@@ -87,6 +88,14 @@ function alert($msg)
                         username.style.borderColor="green";
                         notAvailUsername.innerHTML = "";
                     }
+                }
+                if (!username.checkValidity()) {
+                    username.style.borderColor="red";
+                    notAvailUsername.innerHTML = "Please input alphanumeric, number, and underscore";
+                }
+                else {
+                    username.style.borderColor="green";
+                    notAvailUsername.innerHTML = "";
                 }
             };
             xhttp.open("GET", "../Middlewares/checkusername.php?username=" + userValue, true);
