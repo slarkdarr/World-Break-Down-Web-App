@@ -72,7 +72,7 @@ if (!isset($_GET['id'])) {
     <div class="content">
         <div class="grid-container">
             <div class="grid-item image-grid">
-                <img id="image" src="<?php echo '../'.$item['image']?>" alt="" style="border-radius:20px;">
+                <img id="image" src="<?php echo '../' . $item['image'] ?>" alt="" style="border-radius:20px;">
             </div>
             <div class="grid-item">
                 <div class="header">
@@ -80,7 +80,7 @@ if (!isset($_GET['id'])) {
                     <h1 class="headerTitle" id="title"><?php echo $item['name'] ?></h1>
                 </div>
                 <div class="description" id="description">
-                    <p><?php echo $item['description'] ?></p>                    
+                    <p><?php echo $item['description'] ?></p>
                     <p>Available : <?php echo $item['stock'] ?></p>
                     <p>Sold : <?php echo $item['sold'] ?></p>
                 </div>
@@ -88,25 +88,54 @@ if (!isset($_GET['id'])) {
                     <p id="harga">Rp<?php echo $item['price'] ?>,00</p>
                 </div>
                 <div class="button-group">
-                    <?php if ($role=='admin') { ?>
-                    <a href="ChangeStock.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Change Stock" id="button"/></a>
-                    <a href="EditProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Edit Product" id="button"/></a>
-                    <input type="button" name="someAction" value="Delete Stock" id="button"/>
+                    <?php if ($role == 'admin') { ?>
+                        <a href="ChangeStock.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Change Stock" id="button" /></a>
+                        <a href="EditProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Edit Product" id="button" /></a>
+                        <input type="button" name="someAction" value="Delete Stock" id="button" />
                     <?php } ?>
-                    <?php if ($role=='user') { ?>
-                        <a href="BuyProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Buy" id="button"/></a>
+                    <?php if ($role == 'user') { ?>
+                        <a href="BuyProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Buy" id="button" /></a>
                     <?php } ?>
                 </div>
             </div>
         </div>
     </div>
-    <?php include_once '../partials/deleteconfirmation.php';  ?>
+
+    <!-- Add role  -->
+    <button onclick="document.getElementById('id01').style.display='block'">Delete</button>
+
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <h1>Delete Dorayaki</h1>
+                <p>Are you sure you want to delete this dorayaki?</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <!-- end content -->
 
 
     <!-- Footer -->
     <?php include '../partials/footer.php'; ?>
     <!-- End Footer -->
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
