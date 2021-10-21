@@ -72,7 +72,7 @@ if (!isset($_GET['id'])) {
     <div class="content">
         <div class="grid-container">
             <div class="grid-item image-grid">
-                <img id="image" src="<?php echo '../'.$item['image']?>" alt="">
+                <img id="image" src="<?php echo '../'.$item['image']?>" alt="" style="border-radius:20px;">
             </div>
             <div class="grid-item">
                 <div class="header">
