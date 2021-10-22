@@ -15,6 +15,9 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 `php -S localhost:8080`
 - Pada browser buka `localhost:8080` atau port yang sesuai
 
+## Menjalankan docker
+- Pada working directory jalankan `docker compose up -d` dan buka pada browser `localhost:8000`
+
 ## Keterangan tambahan
 
 ### File tambahan (diluar aplikasi / sebagai developer)
