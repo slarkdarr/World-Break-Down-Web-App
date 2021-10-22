@@ -68,7 +68,6 @@ function alert($msg)
                         </form>
                         <p class="subtext-login">Already have account ?<a href="Login.php"><span>Login Here</span></a></p>
                     </div>
-                    <p class="subtext-login">Have an Account?<a href="Login.php"><span>login here</span></a></p>
                 </div>
             </div>
         </div>
