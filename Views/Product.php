@@ -92,7 +92,7 @@ if (!isset($_GET['id'])) {
                     <?php if ($role == 'admin') { ?>
                         <a href="ChangeStock.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Change Stock" id="button" /></a>
                         <a href="EditProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Edit Product" id="button" /></a>
-                        <input onclick="document.getElementById('id01').style.display='block'" type="button" name="someAction" value="Delete Stock" id="button" />
+                        <input onclick="document.getElementById('id01').style.display='block'" type="button" name="someAction" value="Delete Product" id="button" />
                     <?php } ?>
                     <?php if ($role == 'user') { ?>
                         <a href="BuyProduct.php?id=<?php echo $id ?>"><input type="button" name="someAction" value="Buy" id="button" /></a>
