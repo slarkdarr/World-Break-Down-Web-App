@@ -10,7 +10,7 @@
             <div class="search-container">
                 <form action="../search.php" method="GET">
                 <input type="text" id="keyword" name="keyword" placeholder="Variant of product here .." minlength="2" required>
-                <button type="submit" id="search-button">Submit</button>
+                <button type="submit" id="search-button">Find</button>
                 </form>
             </div>
         </li>
