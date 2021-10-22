@@ -27,7 +27,7 @@ if (isset($_POST['buy'])) {
     $Product = new Product($pdo);
     $History = new History($pdo);
     $User = new User($pdo);
-    $currentProduct = $Product->whereId($_POST['id']);
+    $currentProduct = $Product->whereId($_POST['id'])[0];
 
     $reducedAmount = $_POST['stock'];
     $newStock = $currentProduct['stock'] - $reducedAmount;
@@ -36,7 +36,7 @@ if (isset($_POST['buy'])) {
         $bool = $Product->buyProduct($currentProduct['id'], $newStock, $reducedAmount);
 
         if ($bool) {
-            $users = $User->whereUsername($_SESSION['username']);
+            $users = $User->whereUsername($_SESSION['username'])[0];
             $totalPrice = $currentProduct['price'] * $reducedAmount;
             $history = [
                 'user_id' => $users['id'],
