@@ -31,6 +31,7 @@ if (isset($_POST['query'])) {
 
         if ($products) {
             foreach ($products as $product) {
+                $price = number_format($product['price'],2,",",".");
                 $productHtml .=  "<a href='Views/Product.php?id={$product['id']}' id='{$product['id']}'>
                 <div class='product-card'>
                     <div class='product-image'>
@@ -39,7 +40,7 @@ if (isset($_POST['query'])) {
                     <div class='product-info'>
                         <div class='title text' id='title-item'>{$product['name']}</div>
                         <div class='sub-info'>
-                            <div class='price'>Rp{$product['price']}</div>
+                            <div class='price'>Rp{$price}</div>
                             <div class='rating'>
                                 Sold {$product['sold']}
                             </div>

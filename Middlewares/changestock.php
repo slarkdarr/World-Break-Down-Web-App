@@ -36,7 +36,7 @@ if (isset($_POST['change'])) {
         if ($changedAmount < 0) {
             $newStock = $currentProduct['stock'] - $changedAmount;
             if ($newStock < 0) {
-                setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
+                setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed (amount cannot be less than 0)', time() + 3600, '/');
                 header("location: /index.php");
             } else {
                 $bool = $Product->changeStock($currentProduct['id'], $newStock);

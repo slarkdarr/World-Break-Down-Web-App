@@ -88,7 +88,7 @@ if (!isset($_GET['id'])) {
                     <p>Sold : <?php echo $item['sold'] ?></p>
                 </div>
                 <div class="footer">
-                    <p id="harga">Rp<?php echo $item['price'] ?>,00</p>
+                    <p id="harga">Rp<?php $price = $item['price']; echo number_format($price,2,",","."); ?></p>
                 </div>
                 <div class="button-group">
                     <?php if ($role == 'admin') { ?>

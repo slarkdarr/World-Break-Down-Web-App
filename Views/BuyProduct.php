@@ -54,7 +54,7 @@ if (!isset($_GET['id'])) {
             <form class="form" action="../Middlewares/buyproduct.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
                     <label for="price">Amount</label>
-                    <input onchange="changePrice()" type="number" min=0 max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
+                    <input onchange="changePrice()" type="number" min=1 max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
                 <div id="price" class="text-only"></div>
 
