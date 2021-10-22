@@ -60,7 +60,9 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 
 - Pengubahan/Pembelian Dorayaki
 ![ChangeStock Desktop](./screenshots/ChangeStock_Desktop.png)
+![ChangeStock 800x600](./screenshots/ChangeStock_800x600.png)
 ![BuyDorayaki Desktop](./screenshots/BuyDorayaki_Desktop.png)
+![BuyDorayaki 800x600](./screenshots/BuyDorayaki_800x600.png)
 
 - Riwayat Pengubahan/Pembelian
 ![History Desktop](./screenshots/History_Desktop.png)
@@ -73,27 +75,27 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 - Server-side
     * Model & Database : 13519197
     * Login : 13519197
-    * Register : 13519197
+    * Register : 13519197, 13519107
     * Dashboard : 13519197
     * Pencarian : 13519197
     * Penambahan Dorayaki : 13519197
     * Edit dorayaki : 13519197
-    * Detail Dorayaki :
-    * Pengubahan/Pembelian Dorayaki : 
+    * Detail Dorayaki : 13519107
+    * Pengubahan/Pembelian Dorayaki : 13519107
     * Expire-time : 13519197
     * Docker : 13519197
-    * Riwayat Pengubahan/Pembelian :
+    * Riwayat Pengubahan/Pembelian : 13519107
     * Delete dorayaki : 13519197
 
 - Client-side
     * Login : 13519065
-    * Register :
+    * Register : 13519107
     * Dashboard : 13519197
     * Pencarian : 13519065, 13519197
     * Penambahan Dorayaki : 13519197
     * Edit dorayaki : 13519197
     * Detail Dorayaki : 13519065
-    * Pengubahan/Pembelian Dorayaki :
+    * Pengubahan/Pembelian Dorayaki : 13519107
     * Riwayat Pengubahan/Pembelian : 13519065
 
 ### Bonus
