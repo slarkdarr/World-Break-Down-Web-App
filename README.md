@@ -1,11 +1,31 @@
-## Panduan Pengerjaan
-Berikut adalah hal yang harus diperhatikan untuk pengumpulan tugas ini:
-1. Buatlah grup pada Gitlab dengan format "IF3110-2021-KXX-01-YY", dengan XX adalah nomor kelas dan YY adalah nomor kelompok.
-2. Tambahkan anggota tim pada grup anda.
-3. **Fork** pada repository ini dengan organisasi yang telah dibuat.
-4. Ubah hak akses repository hasil Fork anda menjadi **private**.
-5. Silakan commit pada repository anda (hasil fork). Lakukan beberapa commit dengan pesan yang bermakna, contoh: `add register form`, `fix logout bug`, jangan seperti `final`, `benerin dikit`, `fix bug`. Disarankan untuk tidak melakukan commit dengan perubahan yang besar karena akan mempengaruhi penilaian (contoh: hanya melakukan satu commit kemudian dikumpulkan). Sebaiknya commit dilakukan setiap ada penambahan fitur. Commit dari setiap anggota tim akan mempengaruhi penilaian. Jadi, setiap anggota tim harus melakukan commit yang berpengaruh terhadap proses pembuatan aplikasi.
-6. Buatlah file README yang berisi:
+# World Break Down Web App
+
+## Description
+
+
+## Prerequisites
+- nginx / apache
+- php 8.0
+- sqlite php extension enabled
+- php pdo
+
+## Menjalankan server
+- Jalankan nginx atau apache
+- Jalankan perintah berikut pada root directory, port 8080 dapat diganti sesuai kondisi
+`php -S localhost:8080`
+- Pada browser buka `localhost:8080` atau port yang sesuai
+
+## Keterangan tambahan
+
+### File tambahan (diluar aplikasi / sebagai developer)
+- seeder.php digunakan untuk menginput data dummy
+- database/initDb.php digunakan untuk melakukan drop tables kemudian input tables (users, products, histories). Ini juga melakukan input data admin dan user dummy.
+- Berikut akun yang dapat digunakan diawal :
+username : admin  password : admin123 
+username : user password : user123 
+
+
+### Buatlah file README yang berisi:
     * Deskripsi aplikasi web
     * Daftar requirement
     * Cara instalasi
@@ -14,9 +34,3 @@ Berikut adalah hal yang harus diperhatikan untuk pengumpulan tugas ini:
     * Penjelasan mengenai pembagian tugas masing-masing anggota (lihat formatnya pada bagian pembagian tugas).
 
 
-## Link Penting
-* ~~Link spesifikasi: https://docs.google.com/document/d/1-xHgBLsVC2TaNPAH3JI4qoqzNRKTnJWPXgfH1gqFg/edit?usp=sharing~~
-* ~~Link pembagian anggota kelompok: https://docs.google.com/spreadsheets/d/13UB4S0bkTCSkLoj3ZrpMyvblzY7fQhSdlVq_Snjww/edit?usp=sharing~~
-* ~~Link daftar pertanyaan: https://docs.google.com/spreadsheets/d/1-iGI3CAkSkelqSaRFuzPcxws0njWD-2mqCICE3ddc/edit?usp=sharing~~
-* ~~Link responsi: https://docs.google.com/spreadsheets/d/1ij3fge9YFFO3oRjdgnPNIBo03S-JgWcGbtvzYMS7Y/edit?usp=sharing~~
-* Semua file terkait dapat diakses melalui channel teams "Tubes 1", di dalamnya mencakup keempat dokumen di atas
