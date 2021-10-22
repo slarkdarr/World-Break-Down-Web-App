@@ -14,7 +14,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     }
 } else {
     // Destroy session
-    session_unset();
+    sessmasihion_unset();
     session_destroy();
     setcookie('message', 'Prohibited', time() + 3600, '/');
     header("location: /Views/Login.php");

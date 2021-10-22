@@ -76,6 +76,11 @@
       border-radius:15px;
       padding:10px;
       box-shadow: 2px 2px 8px #181818;
+      cursor: pointer;
+  }
+
+  #button:hover {
+      opacity: 0.8;
   }
   .button-group {
       display: inline-block;
