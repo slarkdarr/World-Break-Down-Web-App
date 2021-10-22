@@ -218,7 +218,7 @@ class Product
     public function buyProduct($id, $stock, $sold)
     {
         try {
-            $query = 'UPDATE products SET stock = :stock, sold = :sold WHERE id = :id';
+            $query = 'UPDATE products SET stock = :stock, sold = sold + :sold WHERE id = :id';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([
                 ':stock'  => $stock,

@@ -59,6 +59,8 @@ if (!isset($_GET['id'])) {
                     <input type="number" min='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
 
+                <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
+
                 <div class="input-field">
                     <input class="button" type="submit" id="submit" name="change" value="Change">
                 </div>

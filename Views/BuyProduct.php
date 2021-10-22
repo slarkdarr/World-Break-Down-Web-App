@@ -60,6 +60,8 @@ if (!isset($_GET['id'])) {
                 </div>
                 <div id="price"></div>
 
+                <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
+
                 <div class="input-field">
                     <input class="button" type="submit" id="submit" name="buy" value="Buy">
                 </div>
