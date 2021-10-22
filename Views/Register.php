@@ -39,14 +39,14 @@ function alert($msg)
             <div class="card-right grid-item">
                 <div class="form">
                     <div class="head-form">
-                        <h1>Login</h1>
+                        <h1>Register</h1>
                     </div>
                     <div class="form-input">
                         <form method="POST" action="../Middlewares/register.php">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <div class="form-input">
-                                    <input onkeyup="checkUsername()" pattern="^[a-zA-Z0-9_]*$" minlength="5" type="text" id="username" name="username" placeholder="username" required>
+                                    <input onkeyup="checkUsername()" pattern="^[a-zA-Z0-9_]*$" minlength="5" id="username" name="username" placeholder="username" required>
                                     <div id="username-not-available" class="username-not-available"></div>
                                 </div>
                             </div>
