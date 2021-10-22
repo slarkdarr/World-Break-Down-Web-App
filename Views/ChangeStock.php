@@ -9,7 +9,7 @@
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
 
-    <title>Jajan.id</title>
+    <title>World Break Down</title>
 </head>
 
 <?php

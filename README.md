@@ -1,7 +1,7 @@
 # World Break Down Web App
 
 ## Description
-
+Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 
 ## Prerequisites
 - nginx / apache
