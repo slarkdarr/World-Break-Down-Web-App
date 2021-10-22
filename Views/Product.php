@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../Assets/css/deleteConfirmation.css" />
 
-    <title>Jajan.id</title>
+    <title>World Break Down</title>
 </head>
 
 <?php
