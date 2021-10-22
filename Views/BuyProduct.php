@@ -1,11 +1,8 @@
 <?php
-
+session_start();
 include_once('../config.php');
 include_once('../database/SQLiteConnection.php');
 
-// Validate logged in
-include_once('../config.php');
-session_start();
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'user') {
         setcookie('message', 'Prohibited', time() + 3600, '/');

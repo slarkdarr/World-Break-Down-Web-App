@@ -1,18 +1,19 @@
 <?php
+session_start();
 include_once('../config.php');
 
 if (isset($_COOKIE['message'])) {
     alert($_COOKIE['message']);
 }
 
-if (isset($_COOKIE['username'])) {
-    header("location:" . URL . "index.php");
-}
-
 function alert($msg)
 {
     echo "<script type='text/javascript'>alert('$msg');</script>";
     setcookie('message', '', time() - 3600, '/');
+}
+// Validate if logged in
+if (isset($_SESSION['username'])) {
+    header("location: /index.php");
 }
 ?>
 
@@ -98,31 +99,6 @@ function alert($msg)
             xhttp.open("GET", "../Middlewares/checkusername.php?username=" + userValue, true);
             xhttp.send();
         }
-
-        // function register() {
-        //     let usernameBorder = document.getElementById('username').style.borderColor;
-        //     let username = document.getElementById('username').value;
-        //     let email = document.getElementById('email').value;
-        //     let password = document.getElementById('password').value;
-
-        //     var form_data = new FormData();
-        //     form_data.append('username', username)
-        //     form_data.append('email', email);
-        //     form_data.append('password', password);
-        //     console.log(usernameBorder);
-        //     var ajax = new XMLHttpRequest();
-            // if (usernameBorder !== 'red') {
-            //     ajax.open('POST', '../Middlewares/register.php');
-            //     ajax.send(form_data);
-
-            //     ajax.onreadystatechange = function() {
-            //         if (ajax.readyState == 4 && ajax.status == 200) {
-            //             var response = JSON.parse(ajax.responseText);
-            //         }
-            //     }
-            // }
-
-        // }
     </script>
 </body>
 

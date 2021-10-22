@@ -1,5 +1,6 @@
-
 <?php
+// Validate logged in
+session_start();
 include_once('config.php');
 include_once('database/SQLiteConnection.php');
 include_once('Model/Product.php');
@@ -9,8 +10,6 @@ function alert($msg)
     echo "<script type='text/javascript'>alert('$msg');</script>";
     setcookie('message', '', time() - 3600, '/');
 }
-// Validate logged in
-session_start();
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) === $_COOKIE['token']) {
         if (isset($_COOKIE['message'])) {
