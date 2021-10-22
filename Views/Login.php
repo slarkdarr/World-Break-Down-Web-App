@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('../config.php');
 
 if (isset($_COOKIE['message'])) {
@@ -10,8 +11,6 @@ function alert($msg)
     echo "<script type='text/javascript'>alert('$msg');</script>";
     setcookie('message', '', time() - 3600, '/');
 }
-
-session_start();
 // Validate if logged in
 if (isset($_SESSION['username'])) {
     header("location: /index.php");
