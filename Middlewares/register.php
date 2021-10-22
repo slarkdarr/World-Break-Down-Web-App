@@ -6,8 +6,12 @@ include_once('../config.php');
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $newUser = [
+        'email' => $_POST['email'],
+        'username' => $_POST['username'],
+        'password' =>  password_hash($_POST['password'], PASSWORD_DEFAULT),
+        'role' =>  'user',
+];
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
 
@@ -15,12 +19,12 @@ if (isset($_POST['register'])) {
         $User = new User($pdo);
         $userData = $User->whereUsername($username);
 
-        if (!count($userData)) {
+        if (count($userData) !== 0) {
             setcookie('message', 'Username already exists!', time() + 3600 * 24, '/');
             echo $_COOKIE['message'];
-            header("location: Views/Register.php");
+            header("location: /Views/Register.php");
         } else {
-            $User->insert();
+            $User->insert($newUser);
             setcookie('message', `Register success! Welcome $username!`, time() + 3600 * 24, '/');
             // Generate token
             setcookie('userLoggedIn', $username, time() + 3600, '/');
@@ -28,7 +32,7 @@ if (isset($_POST['register'])) {
             // Save username and role to session
             session_start();
             $_SESSION['username'] = $username;
-            $_SESSION['role'] = $userData[0]['role'];
+            $_SESSION['role'] = $newUser['role'];
             header("location: /index.php");
         }
     } else {
