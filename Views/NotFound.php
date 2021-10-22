@@ -40,6 +40,21 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     <title>World Break Down</title>
 </head>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Assets/css/base.css">
+    <link href="//db.onlinewebfonts.com/c/4a47df713b67c858644e569c4977de19?family=Dorayaki" rel="stylesheet" type="text/css" />
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
+
+    <title>World Break Down</title>
+</head>
+
 <body>
     <!-- Navbar -->
     <?php include '../partials/navbar.php'; ?>
