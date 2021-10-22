@@ -53,13 +53,13 @@ if (!isset($_GET['id'])) {
         <div class="wrapper">
             <h3 class="title">BELI DORAYAKI</h3>
             <p>Stock saat ini</p>
-            <div id="stock" data-id="<?php echo $id ?>" class="stock"></div>
+            <div onkeyup="loadStock()" id="stock" data-id="<?php echo $id ?>" class="stock"></div>
             <form class="form" action="../Middlewares/buyproduct.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
-                    <label for="price">Stock</label>
-                    <input type="number" max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
+                    <label for="price">Amount</label>
+                    <input onkeyup="loadStock()" type="number" min=0 max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
-                <div id="price"></div>
+                <div onkeyup="changePrice()" id="price"></div>
 
                 <div class="input-field">
                     <input class="button" type="submit" id="submit" name="buy" value="Buy">
@@ -92,16 +92,16 @@ if (!isset($_GET['id'])) {
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
             xhttp.send();
         }
-        setInterval(loadStock, 5000);
+        setInterval(loadStock, 1000);
 
         function changePrice() {
             let avail = document.getElementById('available-stock').value;
             let id = stock.getAttribute('data-id');
             let price = document.getElementById('price');
-            const data = JSON.parse(xhttp.responseText);
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
+                    const data = JSON.parse(xhttp.responseText);
                     price.innerHTML = `Price : Rp${avail * data.price},00`;
                 }
             };

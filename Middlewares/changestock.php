@@ -33,7 +33,7 @@ if (isset($_POST['change'])) {
     $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {
-        $bool = $Product->changeStock($newStock, $currentProduct['id']);
+        $bool = $Product->changeStock($currentProduct['id'], $newStock);
         if ($bool) {
             $users = User->whereUsername($_SESSION['username']);
             $history = [

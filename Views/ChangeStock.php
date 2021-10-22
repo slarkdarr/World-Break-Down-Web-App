@@ -55,11 +55,9 @@ if (!isset($_GET['id'])) {
             <div id="stock" data-id="<?php echo $id ?>" class="stock"></div>
             <form class="form" action="../Middlewares/changestock.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
-                    <label for="price">Stock</label>
-                    <input type="number" max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
+                    <label for="price">Amount</label>
+                    <input type="number" min=0 max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
-
-                <!-- <input type="hidden" id="id" name="id" value="<?php echo $id ?>"> -->
 
                 <div class="input-field">
                     <input class="button" type="submit" id="submit" name="change" value="Change">
@@ -92,7 +90,7 @@ if (!isset($_GET['id'])) {
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
             xhttp.send();
         }
-        setInterval(loadStock, 5000);
+        setInterval(loadStock, 1000);
     </script>
 </body>
 
