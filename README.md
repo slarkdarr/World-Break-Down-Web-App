@@ -5,7 +5,7 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 
 ## Prerequisites
 - nginx / apache
-- php 8.0
+- php 8.x
 - sqlite php extension enabled
 - php pdo
 
