@@ -9,7 +9,7 @@ if (isset($_POST['register'])) {
     $newUser = [
         'email' => $_POST['email'],
         'username' => $_POST['username'],
-        'password' =>  password_hash($_POST['password'], PASSWORD_DEFAULT),
+        'password' =>  $_POST['password'],
         'role' =>  'user',
 ];
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
