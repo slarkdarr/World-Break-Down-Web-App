@@ -37,6 +37,31 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 ![Login Desktop](./screenshots/Login_Desktop.png)
 ![Login Responsive](./screenshots/Login_800x600.png)
 
+
+### Pembagian Tugas
+- Server-side
+    * Login :
+    * Register :
+    * Dashboard :
+    * Pencarian :
+    * Penambahan Dorayaki :
+    * Detail Dorayaki :
+    * Pengubahan/Pembelian Dorayaki :
+    * Expire-time :
+    * Docker :
+    * Riwayat Pengubahan/Pembelian :
+
+
+- Client-side
+    * Login :
+    * Register :
+    * Dashboard :
+    * Pencarian :
+    * Penambahan Dorayaki :
+    * Detail Dorayaki :
+    * Pengubahan/Pembelian Dorayaki :
+    * Riwayat Pengubahan/Pembelian :
+
 ### Buatlah file README yang berisi:
     * Deskripsi aplikasi web
     * Daftar requirement
