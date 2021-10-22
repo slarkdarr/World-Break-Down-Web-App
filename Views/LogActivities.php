@@ -88,7 +88,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
                         <td><?php echo $value['date'] ?></td>
                         <td><?php echo "<a href='Product.php?id={$value['product_id']}' style='text-decoration:none;color:black;'>".$value['product_name'] ?></a></td>
                         <td><?php echo $value['quantity'] ?></td>
-                        <td><?php echo $value['total_price'] ?></td>
+                        <td><?php $price = number_format($value['total_price'],2,",","."); echo "Rp$price,00" ?></td>
                         <td><?php echo $value['username'] ?></td>
                     </tr>
                 <?php } ?>
