@@ -37,6 +37,37 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 ![Login Desktop](./screenshots/Login_Desktop.png)
 ![Login Responsive](./screenshots/Login_800x600.png)
 
+- Dashboard
+
+![DashboardTop Desktop](./screenshots/DashboardTop_Desktop.png)
+![DashboardTop 800x600](./screenshots/DashboardTop_800x600.png)
+![DashboardBottom Desktop](./screenshots/DashboardBottom_Desktop.png)
+![DashboardBottom 800x600](./screenshots/DashboardBottom_800x600.png)
+
+- Pencarian
+![Search Desktop](./screenshots/Search_Desktop.png)
+
+- Penambahan Dorayaki
+![AddDorayaki Desktop](./screenshots/AddDorayaki_Desktop.png)
+![AddDorayaki 800x600](./screenshots/AddDorayaki_800x600.png)
+
+- Edit dorayaki
+![EditStock Desktop](./screenshots/EditStock_Desktop.png)
+
+- Detail Dorayaki
+![DetailProduct Desktop](./screenshots/DetailProduct_Desktop.png)
+![DetailProduct 800x600](./screenshots/DetailProduct_800x600.png)
+
+- Pengubahan/Pembelian Dorayaki
+![ChangeStock Desktop](./screenshots/ChangeStock_Desktop.png)
+![BuyDorayaki Desktop](./screenshots/BuyDorayaki_Desktop.png)
+
+- Riwayat Pengubahan/Pembelian
+![History Desktop](./screenshots/History_Desktop.png)
+![History 800x600](./screenshots/History_800x600.png)
+
+- Delete dorayaki
+![DeleteProduct Desktop](./screenshots/DeleteProduct_Desktop.png)
 
 ### Pembagian Tugas
 - Server-side
