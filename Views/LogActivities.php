@@ -76,11 +76,11 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
             <h1>Log Activities</h1>
             <table>
                 <tr>
-                    <th>Tanggal</th>
-                    <th>Nama</th>
-                    <th>Jumlah</th>
-                    <th>Total Harga</th>
-                    <th>User</th>
+                    <th>Date and Time</th>
+                    <th>Dorayaki Name</th>
+                    <th>Amount</th>
+                    <th>Total Price</th>
+                    <th>Username</th>
                 </tr>
                 <?php foreach ($item as $key => $value) { ?>
                     <tr>
@@ -93,7 +93,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
                 <?php } ?>
                 <?php if (count($item)<1) { ?>
                     <tr>
-                        <td colspan="5" align="center">Tidak ada Data</td>
+                        <td colspan="5" align="center">No Available Data</td>
                     </tr>
                 <?php } ?>
             </table>
