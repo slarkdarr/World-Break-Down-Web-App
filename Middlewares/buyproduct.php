@@ -21,16 +21,15 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     header("location: /Views/Login.php");
 }
 
-if (isset($_POST['buy'])) {
-
+if (isset($_GET['id'])) {
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
     $Product = new Product($pdo);
     $History = new History($pdo);
     $User = new User($pdo);
-    $currentProduct = $Product->whereId($_POST['id'])[0];
+    $currentProduct = $Product->whereId($_GET['id'])[0];
 
-    $reducedAmount = $_POST['stock'];
+    $reducedAmount = $_GET['amount'];
     $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {

@@ -33,7 +33,9 @@ if (!isset($_GET['id'])) {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Assets/css/detail.css">
     <link rel="stylesheet" href="../Assets/css/buyProduct.css" />
+    <link rel="stylesheet" href="../Assets/css/buyconfirmation.css" />
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
 
@@ -61,7 +63,7 @@ if (!isset($_GET['id'])) {
                 <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
 
                 <div class="input-field">
-                    <input class="button" type="submit" id="submit" name="buy" value="Buy">
+                    <input onclick="document.getElementById('id01').style.display='block'" type="button" name="someAction" value="Buy Product" id="button" />
                 </div>
 
             </form>
@@ -69,6 +71,20 @@ if (!isset($_GET['id'])) {
     </div>
     <!-- end content -->
 
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <h1>Buy Dorayaki</h1>
+                <p>Are you sure you want to buy this dorayaki?</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="confirm()">Buy</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <!-- Footer -->
 
@@ -94,6 +110,7 @@ if (!isset($_GET['id'])) {
         setInterval(loadStock, 1000);
 
         function changePrice() {
+            let stock = document.getElementById("stock");
             let avail = document.getElementById('available-stock').value;
             let id = stock.getAttribute('data-id');
             let price = document.getElementById('price');
@@ -107,6 +124,23 @@ if (!isset($_GET['id'])) {
             };
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
             xhttp.send();
+        }
+
+        function confirm() {
+            let stock = document.getElementById("stock");
+            var id = stock.getAttribute('data-id');
+            var amount = document.getElementById('available-stock').value;
+            location.href = `../Middlewares/buyproduct.php?id=${id}&amount=${amount}`;
+        }
+
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 </body>
