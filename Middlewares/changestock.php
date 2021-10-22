@@ -29,14 +29,36 @@ if (isset($_POST['change'])) {
     $User = new User($pdo);
     $currentProduct = $Product->whereId($_POST['id'])[0];
 
-    $reducedAmount = $_POST['stock'];
-    $newStock = $currentProduct['stock'] - $reducedAmount;
+    $changedAmount = $_POST['stock'];
 
     if ($pdo != null) {
-        if ($reducedAmount < 0 && $newStock < 0) {
-            setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
-            header("location: /index.php");
+        if ($changedAmount < 0) {
+            $newStock = $currentProduct['stock'] - $changedAmount;
+            if ($newStock < 0) {
+                setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
+                header("location: /index.php");
+            } else {
+                $bool = $Product->changeStock($currentProduct['id'], $newStock);
+                if ($bool) {
+                    $users = $User->whereUsername($_SESSION['username'])[0];
+                    $history = [
+                        'user_id' => $users['id'],
+                        'username' => $users['username'],
+                        'product_id' => $currentProduct['id'],
+                        'product_name' => $currentProduct['name'],
+                        'quantity'  => $changedAmount,
+                        'total_price' => null
+                    ];
+                    $History->insert($history);
+                    setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock successfully changed ', time() + 3600, '/');
+                    header("location: /index.php");
+                } else {
+                    setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
+                    header("location: /index.php");
+                }
+            }
         } else {
+            $newStock = $currentProduct['stock'] + $changedAmount;
             $bool = $Product->changeStock($currentProduct['id'], $newStock);
             if ($bool) {
                 $users = $User->whereUsername($_SESSION['username'])[0];
@@ -45,7 +67,7 @@ if (isset($_POST['change'])) {
                     'username' => $users['username'],
                     'product_id' => $currentProduct['id'],
                     'product_name' => $currentProduct['name'],
-                    'quantity'  => $reducedAmount,
+                    'quantity'  => $changedAmount,
                     'total_price' => null
                 ];
                 $History->insert($history);
