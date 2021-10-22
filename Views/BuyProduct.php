@@ -50,8 +50,8 @@ if (!isset($_GET['id'])) {
     <!-- Content -->
     <div class="content">
         <div class="wrapper">
-            <h3 class="title">BELI DORAYAKI</h3>
-            <p class="text-only">Stock saat ini</p>
+            <h3 class="title">BUY DORAYAKI</h3>
+            <p class="text-only">Current Stock</p>
             <div id="stock" data-id="<?php echo $id ?>" class="text-only"></div>
             <form class="form" action="../Middlewares/buyproduct.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
@@ -118,7 +118,7 @@ if (!isset($_GET['id'])) {
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     const data = JSON.parse(xhttp.responseText);
-                    price.innerHTML = `Price : Rp${(avail * data.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")},00`;
+                    price.innerHTML = `Total Price : Rp${(avail * data.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")},00`;
                     // console.log(data);
                 }
             };
