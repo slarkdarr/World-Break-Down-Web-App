@@ -31,9 +31,6 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
             alert($_COOKIE['message']);
         }
         $role = $_SESSION['role'];
-        if ($role=='user') {
-            header("location: /Views/Login.php");
-        }
     }
 } else {
     // Destroy session
