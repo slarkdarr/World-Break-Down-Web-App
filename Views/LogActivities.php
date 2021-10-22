@@ -49,6 +49,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     //     header("location: /index.php");
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
