@@ -9,6 +9,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
         setcookie('message', 'Prohibited', time() + 3600, '/');
         header("location: /Views/Login.php");
     }
+    $role = $_SESSION['role'];
 } else {
     // Destroy session
     session_unset();
@@ -44,7 +45,7 @@ if (!isset($_GET['id'])) {
 
 <body>
     <!-- Navbar -->
-
+    <?php include '../partials/navbar.php'; ?>
     <!-- End Navbar -->
 
     <!-- Content -->
@@ -71,6 +72,7 @@ if (!isset($_GET['id'])) {
     </div>
     <!-- end content -->
 
+    <!-- Confirmation Button -->
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
         <form class="modal-content" action="/action_page.php">
@@ -85,11 +87,13 @@ if (!isset($_GET['id'])) {
             </div>
         </form>
     </div>
+    <!-- End Confirmation Button -->
 
     <!-- Footer -->
-
+    <?php include '../partials/footer.php'; ?>
     <!-- End  Footer -->
 
+    <!-- Script -->
     <script type="text/javascript">
         function loadStock() {
             let stock = document.getElementById("stock");
@@ -143,6 +147,7 @@ if (!isset($_GET['id'])) {
             }
         }
     </script>
+    <!-- End Script -->
 </body>
 
 </html>

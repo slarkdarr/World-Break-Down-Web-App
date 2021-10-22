@@ -9,6 +9,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
         setcookie('message', 'Prohibited', time() + 3600, '/');
         header("location: /Views/Login.php");
     }
+    $role = $_SESSION['role'];
 } else {
     // Destroy session
     session_unset();
@@ -42,14 +43,14 @@ if (!isset($_GET['id'])) {
 
 <body>
     <!-- Navbar -->
-
+    <?php include '../partials/navbar.php'; ?>
     <!-- End Navbar -->
 
     <!-- Content -->
     <div class="content">
         <div class="wrapper">
             <h3 class="title">CHANGE STOCK DORAYAKI</h3>
-            <p class="text-only">Stock saat ini</p>
+            <p class="text-only">Current Stock</p>
             <div id="stock" data-id="<?php echo $id ?>" class="text-only"></div>
             <form class="form" action="../Middlewares/changestock.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
@@ -70,9 +71,10 @@ if (!isset($_GET['id'])) {
 
 
     <!-- Footer -->
-
+    <?php include '../partials/footer.php'; ?>
     <!-- End  Footer -->
 
+    <!-- Script -->
     <script type="text/javascript">
         function loadStock() {
             let stock = document.getElementById("stock");
@@ -92,6 +94,7 @@ if (!isset($_GET['id'])) {
         }
         setInterval(loadStock, 1000);
     </script>
+    <!-- End Script -->
 </body>
 
 </html>
