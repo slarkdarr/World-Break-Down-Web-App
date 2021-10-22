@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../Assets/css/createProduct.css" />
-    <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
-
-    <title>World Break Down</title>
-</head>
-
 <?php
-
+session_start();
 include_once('../config.php');
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/Product.php');
 
 // Validate logged in
 include_once('../config.php');
-session_start();
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'admin') {
         setcookie('message', 'Prohibited', time() + 3600, '/');
@@ -59,6 +44,20 @@ if (!isset($_GET['id'])) {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Assets/css/createProduct.css" />
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
+
+    <title>World Break Down</title>
+</head>
 
 <body>
     <!-- Navbar -->
