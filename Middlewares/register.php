@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/User.php');
 include_once('../config.php');
@@ -30,7 +31,6 @@ if (isset($_POST['register'])) {
             setcookie('userLoggedIn', $username, time() + 3600, '/');
             setcookie('token', md5($username . SECRET_WORD) , time() + 3600, '/');
             // Save username and role to session
-            session_start();
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $newUser['role'];
             header("location: /index.php");
