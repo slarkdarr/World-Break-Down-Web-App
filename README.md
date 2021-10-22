@@ -21,8 +21,8 @@
 - seeder.php digunakan untuk menginput data dummy
 - database/initDb.php digunakan untuk melakukan drop tables kemudian input tables (users, products, histories). Ini juga melakukan input data admin dan user dummy.
 - Berikut akun yang dapat digunakan diawal :
-username : admin  password : admin123 
-username : user password : user123 
+    * username : admin  password : admin123
+    * username : user password : user123 
 
 
 ### Buatlah file README yang berisi:
