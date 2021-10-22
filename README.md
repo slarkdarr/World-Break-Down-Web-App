@@ -60,8 +60,8 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 
 - Pengubahan/Pembelian Dorayaki
 ![ChangeStock Desktop](./screenshots/ChangeStock_Desktop.png)
-![ChangeStock 800x600](./screenshots/ChangeStock_800x600.png)
 ![BuyDorayaki Desktop](./screenshots/BuyDorayaki_Desktop.png)
+![ChangeStock 800x600](./screenshots/ChangeStock_800x600.png)
 ![BuyDorayaki 800x600](./screenshots/BuyDorayaki_800x600.png)
 
 - Riwayat Pengubahan/Pembelian
