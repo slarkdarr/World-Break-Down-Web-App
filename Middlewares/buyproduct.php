@@ -33,26 +33,31 @@ if (isset($_POST['buy'])) {
     $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {
-        $bool = $Product->buyProduct($currentProduct['id'], $newStock, $reducedAmount);
-
-        if ($bool) {
-            $users = $User->whereUsername($_SESSION['username'])[0];
-            $totalPrice = $currentProduct['price'] * $reducedAmount;
-            $history = [
-                'user_id' => $users['id'],
-                'username' => $users['username'],
-                'product_id' => $currentProduct['id'],
-                'product_name' => $currentProduct['name'],
-                'quantity'  => $reducedAmount,
-                'total_price' => $totalPrice
-            ];
-            $History->insert($history);
-            // Set cookie
-            setcookie('message', 'Variant ' . $currentProduct['name'] . ' successfully bought', time() + 3600, '/');
+        if ($reducedAmount <= 0) {
+            setcookie('message', 'Variant ' . $currentProduct['name'] . ' failed to be bought (cannot buy 0 amount)', time() + 3600, '/');
             header("location: /index.php");
         } else {
-            setcookie('message', 'Variant ' . $currentProduct['name'] . ' failed to be bought', time() + 3600, '/');
-            header("location: /index.php");
+            $bool = $Product->buyProduct($currentProduct['id'], $newStock, $reducedAmount);
+
+            if ($bool) {
+                $users = $User->whereUsername($_SESSION['username'])[0];
+                $totalPrice = $currentProduct['price'] * $reducedAmount;
+                $history = [
+                    'user_id' => $users['id'],
+                    'username' => $users['username'],
+                    'product_id' => $currentProduct['id'],
+                    'product_name' => $currentProduct['name'],
+                    'quantity'  => $reducedAmount,
+                    'total_price' => $totalPrice
+                ];
+                $History->insert($history);
+                // Set cookie
+                setcookie('message', 'Variant ' . $currentProduct['name'] . ' successfully bought', time() + 3600, '/');
+                header("location: /index.php");
+            } else {
+                setcookie('message', 'Variant ' . $currentProduct['name'] . ' failed to be bought', time() + 3600, '/');
+                header("location: /index.php");
+            }
         }
     } else {
         // Fail to connect
