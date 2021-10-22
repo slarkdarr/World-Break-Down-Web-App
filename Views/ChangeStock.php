@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../Assets/css/createProduct.css" />
+    <link rel="stylesheet" href="../Assets/css/changeStock.css" />
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/55c10e2ab9.js" crossorigin="anonymous"></script>
 
@@ -51,8 +51,8 @@ if (!isset($_GET['id'])) {
     <div class="content">
         <div class="wrapper">
             <h3 class="title">CHANGE STOCK DORAYAKI</h3>
-            <p>Stock saat ini</p>
-            <div id="stock" data-id="<?php echo $id ?>" class="stock"></div>
+            <p class="text-only">Stock saat ini</p>
+            <div id="stock" data-id="<?php echo $id ?>" class="text-only"></div>
             <form class="form" action="../Middlewares/changestock.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
                     <label for="price">Amount</label>
