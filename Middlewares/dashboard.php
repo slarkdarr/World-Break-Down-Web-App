@@ -39,7 +39,7 @@ if (isset($_POST['page'])) {
                     <div class='sub-info'>
                         <div class='price'>Rp{$product['price']}</div>
                         <div class='rating'>
-                            Terjual {$product['sold']}
+                            Sold {$product['sold']}
                         </div>
                     </div>
                 </div>

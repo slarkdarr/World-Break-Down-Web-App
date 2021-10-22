@@ -41,7 +41,7 @@ if (isset($_POST['query'])) {
                         <div class='sub-info'>
                             <div class='price'>Rp{$product['price']}</div>
                             <div class='rating'>
-                                Terjual {$product['sold']}
+                                Sold {$product['sold']}
                             </div>
                         </div>
                     </div>
