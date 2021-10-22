@@ -210,18 +210,40 @@ class Product
     }
 
     /**
-     * @param associative $stock associative product stock
      * @param associative $id associative product id
+     * @param associative $stock associative product stock
+     * @param associative $sold associative product sold amount
      * @return bool true if success, else false
      */
-    public function changeStock($stock, $id)
+    public function buyProduct($id, $stock, $sold)
+    {
+        try {
+            $query = 'UPDATE products SET stock = :stock, sold = :sold WHERE id = :id';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                ':stock'  => $stock,
+                ':id' => $id,
+                ':sold' => $sold
+            ]);
+            return true;
+        } catch (\PDOException $Exception) {
+            return false;
+        }
+    }
+
+    /**
+     * @param associative $id associative product id
+     * @param associative $stock associative product stock
+     * @return bool true if success, else false
+     */
+    public function changeStock($id, $stock)
     {
         try {
             $query = 'UPDATE products SET stock = :stock WHERE id = :id';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([
-                ':stock'  => 'stock',
-                ':id' => 'id'
+                ':stock'  => $stock,
+                ':id' => $id
             ]);
             return true;
         } catch (\PDOException $Exception) {
