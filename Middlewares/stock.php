@@ -6,7 +6,7 @@ include_once('../config.php');
 // Validate logged in
 session_start();
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
-    if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token'] || $_SESSION['role'] !== 'admin') {
+    if ((md5($_COOKIE['userLoggedIn'] . SECRET_WORD)) !== $_COOKIE['token']) {
         setcookie('message', 'Prohibited', time() + 3600, '/');
         header("location: /Views/Login.php");
     }

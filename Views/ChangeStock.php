@@ -84,7 +84,7 @@ if (!isset($_GET['id'])) {
                     const data = JSON.parse(xhttp.responseText);
                     stock.innerHTML = data.stock;
                     avail.max = data.stock;
-                    console.log(data.stock);
+                    // console.log(data.stock);
                 }
             };
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);

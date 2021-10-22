@@ -16,7 +16,6 @@
 
 include_once('../config.php');
 include_once('../database/SQLiteConnection.php');
-include_once('../Model/Product.php');
 
 // Validate logged in
 include_once('../config.php');
@@ -53,13 +52,13 @@ if (!isset($_GET['id'])) {
         <div class="wrapper">
             <h3 class="title">BELI DORAYAKI</h3>
             <p>Stock saat ini</p>
-            <div onkeyup="loadStock()" id="stock" data-id="<?php echo $id ?>" class="stock"></div>
+            <div id="stock" data-id="<?php echo $id ?>" class="stock"></div>
             <form class="form" action="../Middlewares/buyproduct.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
                     <label for="price">Amount</label>
-                    <input onkeyup="loadStock()" type="number" min=0 max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
+                    <input onchange="changePrice()" type="number" min=0 max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
-                <div onkeyup="changePrice()" id="price"></div>
+                <div id="price"></div>
 
                 <div class="input-field">
                     <input class="button" type="submit" id="submit" name="buy" value="Buy">
@@ -86,7 +85,7 @@ if (!isset($_GET['id'])) {
                     const data = JSON.parse(xhttp.responseText);
                     stock.innerHTML = data.stock;
                     avail.max = data.stock;
-                    console.log(data.stock);
+                    // console.log(data);
                 }
             };
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
@@ -103,6 +102,7 @@ if (!isset($_GET['id'])) {
                 if (this.readyState == 4 && this.status == 200) {
                     const data = JSON.parse(xhttp.responseText);
                     price.innerHTML = `Price : Rp${avail * data.price},00`;
+                    // console.log(data);
                 }
             };
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);

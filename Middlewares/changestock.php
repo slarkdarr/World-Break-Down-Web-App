@@ -35,13 +35,13 @@ if (isset($_POST['change'])) {
     if ($pdo != null) {
         $bool = $Product->changeStock($currentProduct['id'], $newStock);
         if ($bool) {
-            $users = User->whereUsername($_SESSION['username']);
+            $users = $User->whereUsername($_SESSION['username']);
             $history = [
                 'user_id' => $users['id'],
                 'username' => $users['username'],
                 'product_id' => $currentProduct['id'],
                 'product_name' => $currentProduct['name'],
-                'quantity'  => $newStock,
+                'quantity'  => $reducedAmount,
                 'total_price' => null
             ];
             $History->insert($history);
