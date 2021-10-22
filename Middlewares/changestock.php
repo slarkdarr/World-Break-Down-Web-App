@@ -33,7 +33,7 @@ if (isset($_POST['change'])) {
     $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {
-        if ($reducedAmount < 0 && -$reducedAmount > $currentProduct['stock']) {
+        if ($reducedAmount < 0 && $newStock < 0) {
             setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
             header("location: /index.php");
         } else {
