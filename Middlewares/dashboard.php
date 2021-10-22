@@ -1,8 +1,8 @@
 <?php
+ob_start();
 include_once('../config.php');
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/Product.php');
-
 
 if (isset($_POST['page'])) {
     $page = 1;

@@ -1,5 +1,6 @@
 <?php
 include_once("../config.php");
+ob_start();
 
 $tables = [
     'users' => 'DROP TABLE IF EXISTS users; CREATE TABLE IF NOT EXISTS users (

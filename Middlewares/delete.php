@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/Product.php');
 include_once('../config.php');

@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 include_once('../config.php');
 
 if (isset($_COOKIE['message'])) {

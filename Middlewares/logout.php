@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 // Destroy session
 session_unset();
 session_destroy();

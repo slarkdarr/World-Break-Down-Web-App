@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once('config.php');
 include_once('Database/SQLiteConnection.php');
 include_once('Model/User.php');

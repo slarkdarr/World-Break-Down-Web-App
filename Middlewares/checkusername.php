@@ -1,8 +1,8 @@
 <?php
+ob_start();
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/User.php');
 include_once('../config.php');
-
 
 $username = $_GET['username'];
 $databasePath = '../database/' . DATABASE_NAME . '.sqlite';

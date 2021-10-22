@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 // Validate logged in
 include_once('../config.php');
 if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {

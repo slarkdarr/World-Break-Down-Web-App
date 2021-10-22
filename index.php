@@ -1,6 +1,7 @@
 <?php
 // Validate logged in
 session_start();
+ob_start();
 include_once('config.php');
 include_once('database/SQLiteConnection.php');
 include_once('Model/Product.php');
