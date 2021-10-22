@@ -66,6 +66,7 @@ function alert($msg)
                                 <button type="submit" id="register" name="register">Register</button>
                             </div>
                         </form>
+                        <p class="subtext-login">Already have account ?<a href="Login.php"><span>Login Here</span></a></p>
                     </div>
                 </div>
             </div>
