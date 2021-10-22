@@ -33,23 +33,28 @@ if (isset($_POST['change'])) {
     $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {
-        $bool = $Product->changeStock($currentProduct['id'], $newStock);
-        if ($bool) {
-            $users = $User->whereUsername($_SESSION['username']);
-            $history = [
-                'user_id' => $users['id'],
-                'username' => $users['username'],
-                'product_id' => $currentProduct['id'],
-                'product_name' => $currentProduct['name'],
-                'quantity'  => $reducedAmount,
-                'total_price' => null
-            ];
-            $History->insert($history);
-            setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock successfully changed ', time() + 3600, '/');
-            header("location: /index.php");
-        } else {
+        if ($reducedAmount < 0 && -$reducedAmount > $currentProduct['stock']) {
             setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
             header("location: /index.php");
+        } else {
+            $bool = $Product->changeStock($currentProduct['id'], $newStock);
+            if ($bool) {
+                $users = $User->whereUsername($_SESSION['username']);
+                $history = [
+                    'user_id' => $users['id'],
+                    'username' => $users['username'],
+                    'product_id' => $currentProduct['id'],
+                    'product_name' => $currentProduct['name'],
+                    'quantity'  => $reducedAmount,
+                    'total_price' => null
+                ];
+                $History->insert($history);
+                setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock successfully changed ', time() + 3600, '/');
+                header("location: /index.php");
+            } else {
+                setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock failed to be changed ', time() + 3600, '/');
+                header("location: /index.php");
+            }
         }
     } else {
         // Fail to connect
