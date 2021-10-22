@@ -73,6 +73,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     <!-- Content -->
     <div class="content">
         <div class="logact">
+            <h1>Log Activities</h1>
             <table>
                 <tr>
                     <th>Tanggal</th>
