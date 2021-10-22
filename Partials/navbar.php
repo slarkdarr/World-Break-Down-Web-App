@@ -1,6 +1,6 @@
 <nav>
     <ul>
-        <li><a href="/register">Home</a></li>
+        <li><a href="/">Home</a></li>
         <?php if($role=='admin') {?>
             <li><a href="../Views/CreateProduct.php">Add Product</a></li>
         <?php } ?>
