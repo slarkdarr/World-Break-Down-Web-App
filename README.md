@@ -40,27 +40,37 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
 
 ### Pembagian Tugas
 - Server-side
-    * Login :
-    * Register :
-    * Dashboard :
-    * Pencarian :
-    * Penambahan Dorayaki :
+    * Model & Database : 13519197
+    * Login : 13519197
+    * Register : 13519197
+    * Dashboard : 13519197
+    * Pencarian : 13519197
+    * Penambahan Dorayaki : 13519197
+    * Edit dorayaki : 13519197
     * Detail Dorayaki :
-    * Pengubahan/Pembelian Dorayaki :
-    * Expire-time :
-    * Docker :
+    * Pengubahan/Pembelian Dorayaki : 
+    * Expire-time : 13519197
+    * Docker : 13519197
     * Riwayat Pengubahan/Pembelian :
-
+    * Delete dorayaki : 13519197
 
 - Client-side
-    * Login :
+    * Login : 13519065
     * Register :
-    * Dashboard :
-    * Pencarian :
-    * Penambahan Dorayaki :
-    * Detail Dorayaki :
+    * Dashboard : 13519197
+    * Pencarian : 13519065, 13519197
+    * Penambahan Dorayaki : 13519197
+    * Edit dorayaki : 13519197
+    * Detail Dorayaki : 13519065
     * Pengubahan/Pembelian Dorayaki :
-    * Riwayat Pengubahan/Pembelian :
+    * Riwayat Pengubahan/Pembelian : 13519065
+
+### Bonus
+- Edit product
+- Riwayat
+- Docker
+- Token
+- Responsive design
 
 ### Buatlah file README yang berisi:
     * Deskripsi aplikasi web
