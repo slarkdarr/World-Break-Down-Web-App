@@ -28,6 +28,15 @@ Sebuah aplikasi e-commerce sederhana menjual varian dorayaki
     * username : user password : user123 
 
 
+### Screenshot
+- Register
+![Register Desktop](./screenshots/Register_Desktop.png)
+![Register Responsive](./screenshots/Register_800x600.png)
+
+- Login
+![Login Desktop](./screenshots/Login_Desktop.png)
+![Login Responsive](./screenshots/Login_800x600.png)
+
 ### Buatlah file README yang berisi:
     * Deskripsi aplikasi web
     * Daftar requirement
