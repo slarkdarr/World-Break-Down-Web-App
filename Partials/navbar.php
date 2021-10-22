@@ -1,12 +1,10 @@
 <nav>
     <ul>
         <li><a href="/register">Home</a></li>
-        <?php if($role=='user') {?>
-        <li><a href="../Views/LogActivities.php">Log Activities</a></li>
-        <?php } ?>
         <?php if($role=='admin') {?>
-        <li><a href="../Views/CreateProduct.php">Add Product</a></li>
+            <li><a href="../Views/CreateProduct.php">Add Product</a></li>
         <?php } ?>
+        <li><a href="../Views/LogActivities.php">Log Activities</a></li>
         <li style="float:right"><a class="active" href="../Middlewares/logout.php">Logout</a></li>
         <li style="float:right">
             <div class="search-container">
