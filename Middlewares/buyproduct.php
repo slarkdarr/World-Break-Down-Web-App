@@ -29,23 +29,24 @@ if (isset($_POST['buy'])) {
     $User = new User($pdo);
     $currentProduct = $Product->whereId($_POST['id']);
 
-    $newStock = $_POST['stock'];
+    $reducedAmount = $_POST['stock'];
+    $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {
-        $bool = $Product->changeStock($newStock, $currentProduct['id']);
+        $bool = $Product->buyProduct($newStock, $currentProduct['id'], $reducedAmount);
 
         if ($bool) {
             $users = User->whereUsername($_SESSION['username']);
-            $total_price = $currentProduct[3]*$newStock;
+            $totalPrice = $currentProduct['price'] * $reducedAmount;
             $history = [
-                'user_id' => $users[0],
-                'username' => $users[2],
-                'product_id' => $currentProduct[0],
-                'product_name' => $currentProduct[1],
-                'quantity'  => $newStock,
-                'total_price' => $currentProduct[0]
+                'user_id' => $users['id'],
+                'username' => $users['username'],
+                'product_id' => $currentProduct['id'],
+                'product_name' => $currentProduct['name'],
+                'quantity'  => $reducedAmount,
+                'total_price' => $totalPrice
             ];
-            $History->insert();
+            $History->insert($history);
             // Set cookie
             setcookie('message', 'Variant ' . $currentProduct['name'] . ' successfully bought', time() + 3600, '/');
             header("location: /index.php");

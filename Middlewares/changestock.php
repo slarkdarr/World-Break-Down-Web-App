@@ -1,6 +1,8 @@
 <?php
 include_once('../database/SQLiteConnection.php');
 include_once('../Model/Product.php');
+include_once('../Model/History.php');
+include_once('../Model/User.php');
 include_once('../config.php');
 
 // Validate logged in
@@ -18,18 +20,31 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     header("location: /Views/Login.php");
 }
 
-if (isset($_POST['buy'])) {
+if (isset($_POST['change'])) {
 
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
     $Product = new Product($pdo);
+    $History = new History($pdo);
+    $User = new User($pdo);
     $currentProduct = $Product->whereId($_POST['id']);
 
-    $newStock = $_POST['stock'];
+    $reducedAmount = $_POST['stock'];
+    $newStock = $currentProduct['stock'] - $reducedAmount;
 
     if ($pdo != null) {
         $bool = $Product->changeStock($newStock, $currentProduct['id']);
         if ($bool) {
+            $users = User->whereUsername($_SESSION['username']);
+            $history = [
+                'user_id' => $users['id'],
+                'username' => $users['username'],
+                'product_id' => $currentProduct['id'],
+                'product_name' => $currentProduct['name'],
+                'quantity'  => $newStock,
+                'total_price' => null
+            ];
+            $History->insert($history);
             setcookie('message', 'Variant ' . $currentProduct['name'] . ' stock successfully changed ', time() + 3600, '/');
             header("location: /index.php");
         } else {

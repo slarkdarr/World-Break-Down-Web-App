@@ -16,7 +16,6 @@
 
 include_once('../config.php');
 include_once('../database/SQLiteConnection.php');
-include_once('../Model/Product.php');
 
 // Validate logged in
 include_once('../config.php');
@@ -38,23 +37,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
 if (!isset($_GET['id'])) {
     header("location: /index.php");
 } else {
-    // Sqlite conn
-    $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
-    $pdo = (new SQLiteConnection())->connect($databasePath);
-    if ($pdo !== null) {
-        $id = $_GET['id'];
-        $Product = new Product($pdo);
-        $item = $Product->whereId($id);
-        if (count($item) < 1) {
-            header("location: /index.php");
-        } else {
-            // get first item
-            $item = $item[0];
-        }
-    } else {
-        // Fail to connect
-        header("location: /index.php");
-    }
+    $id = $_GET['id'];
 }
 
 ?>
@@ -69,17 +52,17 @@ if (!isset($_GET['id'])) {
         <div class="wrapper">
             <h3 class="title">CHANGE STOCK DORAYAKI</h3>
             <p>Stock saat ini</p>
-            <div id="stock" data-id="<?php echo $id ?>" class="stock">30</div>
+            <div id="stock" data-id="<?php echo $id ?>" class="stock"></div>
             <form class="form" action="../Middlewares/changestock.php" method="POST" enctype="multipart/form-data">
                 <div class="input-field">
                     <label for="price">Stock</label>
-                    <input type="number" min='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
+                    <input type="number" max='' id="available-stock" name="stock" value="<?php echo $item['stock'] ?>" required>
                 </div>
 
                 <!-- <input type="hidden" id="id" name="id" value="<?php echo $id ?>"> -->
 
                 <div class="input-field">
-                    <input class="button" type="submit" id="submit" name="edit" value="Update">
+                    <input class="button" type="submit" id="submit" name="change" value="Change">
                 </div>
 
             </form>
@@ -102,8 +85,8 @@ if (!isset($_GET['id'])) {
                 if (this.readyState == 4 && this.status == 200) {
                     const data = JSON.parse(xhttp.responseText);
                     stock.innerHTML = data.stock;
-                    avail.min = -data.stock;
-                    console.log(-data.stock)
+                    avail.max = data.stock;
+                    console.log(data.stock);
                 }
             };
             xhttp.open("GET", "../Middlewares/stock.php?id=" + id, true);
