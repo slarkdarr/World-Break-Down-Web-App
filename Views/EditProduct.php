@@ -39,6 +39,7 @@ if (!isset($_GET['id'])) {
     header("location: /index.php");
 } else {
     // Sqlite conn
+    $role = $_SESSION['role'];
     $databasePath = '../database/' . DATABASE_NAME . '.sqlite';
     $pdo = (new SQLiteConnection())->connect($databasePath);
     if ($pdo !== null) {
@@ -51,18 +52,18 @@ if (!isset($_GET['id'])) {
             // get first item
             $item = $item[0];
         }
+
     } else {
         // Fail to connect
         header("location: /index.php");
     }
 }
-
 ?>
 
 <body>
     <!-- Navbar -->
-
-    <!-- End Navbar -->
+    <?php include '../partials/navbar.php'; ?>
+    <!-- End navbar -->
 
     <!-- Content -->
     <div class="content">
@@ -109,8 +110,8 @@ if (!isset($_GET['id'])) {
 
 
     <!-- Footer -->
-
-    <!-- End  Footer -->
+    <?php include '../partials/footer.php'; ?>
+    <!-- End Footer -->
 
 
 </body>

@@ -31,9 +31,6 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
             alert($_COOKIE['message']);
         }
         $role = $_SESSION['role'];
-        if ($role=='user') {
-            header("location: /Views/Login.php");
-        }
     }
 } else {
     // Destroy session
@@ -76,6 +73,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
     <!-- Content -->
     <div class="content">
         <div class="logact">
+            <h1>Log Activities</h1>
             <table>
                 <tr>
                     <th>Tanggal</th>

@@ -26,10 +26,10 @@ if (isset($_GET['id'])) {
     $rowCount = $Product->deleteById($_GET['id']);
 
     if ($rowCount > 0) {
-        setcookie('message', 'Variant ' . $_GET['id'] . ' deleted successfully', time() + 3600, '/');
+        setcookie('message', 'Variant with id ' . $_GET['id'] . ' deleted successfully', time() + 3600, '/');
         header("location: /index.php");
     } else {
-        setcookie('message', 'Variant ' . $_GET['id'] . ' fail to deleted', time() + 3600, '/');
+        setcookie('message', 'Variant with id' . $_GET['id'] . ' fail to deleted', time() + 3600, '/');
         header("location: /index.php");
     }
 } else {

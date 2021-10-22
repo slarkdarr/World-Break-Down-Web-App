@@ -22,6 +22,7 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
         setcookie('message', 'Prohibited', time() + 3600, '/');
         header("location: /Views/Login.php");
     }
+    $role = $_SESSION['role'];
 } else {
     // Destroy session
     session_unset();
@@ -33,8 +34,8 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
 
 <body>
     <!-- Navbar -->
-
-    <!-- End Navbar -->
+    <?php include '../partials/navbar.php'; ?>
+    <!-- End navbar -->
 
     <!-- Content -->
     <div class="content">
@@ -78,8 +79,8 @@ if (isset($_COOKIE['token']) && isset($_COOKIE['userLoggedIn'])) {
 
 
     <!-- Footer -->
-
-    <!-- End  Footer -->
+    <?php include '../partials/footer.php'; ?>
+    <!-- End Footer -->
 
 
 </body>
